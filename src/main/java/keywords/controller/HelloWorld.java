@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.List;
 
+
+/*
+* http://localhost:8989/swagger-ui.html 查看接口文档
+* */
 @Api(description = "好词服务")
 @RestController
 public class HelloWorld {
