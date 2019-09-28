@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dao.UserDao">
-  <resultMap id="BaseResultMap" type="model.User">
-    <id column="uid" jdbcType="INTEGER" property="uid" />
+<mapper namespace="clue.dao.ClUserDao">
+  <resultMap id="BaseResultMap" type="clue.model.ClUser">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="mobile" jdbcType="CHAR" property="mobile" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="third_openid" jdbcType="CHAR" property="thirdOpenid" />
+    <result column="third_sessionkey" jdbcType="CHAR" property="thirdSessionkey" />
+    <result column="third_ext_info" jdbcType="CHAR" property="thirdExtInfo" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
   </resultMap>
@@ -67,15 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, username, `password`, createtime, lasttime
+    `uid`, username, mobile, `password`, third_openid, third_sessionkey, third_ext_info, 
+    createtime, lasttime
   </sql>
-  <select id="selectByExample" parameterType="model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="clue.model.ClUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from cl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,36 +96,50 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
-    where `uid` = #{uid,jdbcType=INTEGER}
+    from cl_user
+    where `uid` = #{uid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where `uid` = #{uid,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cl_user
+    where `uid` = #{uid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="model.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="clue.model.ClUserExample">
+    delete from cl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="model.User" useGeneratedKeys="true">
-    insert into user (username, `password`, createtime, 
-      lasttime)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{lasttime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="clue.model.ClUser" useGeneratedKeys="true">
+    insert into cl_user (username, mobile, `password`, 
+      third_openid, third_sessionkey, third_ext_info, 
+      createtime, lasttime)
+    values (#{username,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
+      #{thirdOpenid,jdbcType=CHAR}, #{thirdSessionkey,jdbcType=CHAR}, #{thirdExtInfo,jdbcType=CHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="model.User" useGeneratedKeys="true">
-    insert into user
+  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="clue.model.ClUser" useGeneratedKeys="true">
+    insert into cl_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="username != null">
         username,
       </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
       <if test="password != null">
         `password`,
+      </if>
+      <if test="thirdOpenid != null">
+        third_openid,
+      </if>
+      <if test="thirdSessionkey != null">
+        third_sessionkey,
+      </if>
+      <if test="thirdExtInfo != null">
+        third_ext_info,
       </if>
       <if test="createtime != null">
         createtime,
@@ -133,8 +152,20 @@
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=CHAR},
+      </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdOpenid != null">
+        #{thirdOpenid,jdbcType=CHAR},
+      </if>
+      <if test="thirdSessionkey != null">
+        #{thirdSessionkey,jdbcType=CHAR},
+      </if>
+      <if test="thirdExtInfo != null">
+        #{thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
@@ -144,23 +175,35 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="clue.model.ClUserExample" resultType="java.lang.Long">
+    select count(*) from cl_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update cl_user
     <set>
       <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=INTEGER},
+        `uid` = #{record.uid,jdbcType=BIGINT},
       </if>
       <if test="record.username != null">
         username = #{record.username,jdbcType=VARCHAR},
       </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=CHAR},
+      </if>
       <if test="record.password != null">
         `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdOpenid != null">
+        third_openid = #{record.thirdOpenid,jdbcType=CHAR},
+      </if>
+      <if test="record.thirdSessionkey != null">
+        third_sessionkey = #{record.thirdSessionkey,jdbcType=CHAR},
+      </if>
+      <if test="record.thirdExtInfo != null">
+        third_ext_info = #{record.thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -174,24 +217,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
-    set `uid` = #{record.uid,jdbcType=INTEGER},
+    update cl_user
+    set `uid` = #{record.uid,jdbcType=BIGINT},
       username = #{record.username,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=CHAR},
       `password` = #{record.password,jdbcType=VARCHAR},
+      third_openid = #{record.thirdOpenid,jdbcType=CHAR},
+      third_sessionkey = #{record.thirdSessionkey,jdbcType=CHAR},
+      third_ext_info = #{record.thirdExtInfo,jdbcType=CHAR},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
       lasttime = #{record.lasttime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="clue.model.ClUser">
+    update cl_user
     <set>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdOpenid != null">
+        third_openid = #{thirdOpenid,jdbcType=CHAR},
+      </if>
+      <if test="thirdSessionkey != null">
+        third_sessionkey = #{thirdSessionkey,jdbcType=CHAR},
+      </if>
+      <if test="thirdExtInfo != null">
+        third_ext_info = #{thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
@@ -200,14 +259,18 @@
         lasttime = #{lasttime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where `uid` = #{uid,jdbcType=INTEGER}
+    where `uid` = #{uid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.User">
-    update user
+  <update id="updateByPrimaryKey" parameterType="clue.model.ClUser">
+    update cl_user
     set username = #{username,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=CHAR},
       `password` = #{password,jdbcType=VARCHAR},
+      third_openid = #{thirdOpenid,jdbcType=CHAR},
+      third_sessionkey = #{thirdSessionkey,jdbcType=CHAR},
+      third_ext_info = #{thirdExtInfo,jdbcType=CHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP},
       lasttime = #{lasttime,jdbcType=TIMESTAMP}
-    where `uid` = #{uid,jdbcType=INTEGER}
+    where `uid` = #{uid,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="keywords.clue.dao.UserDao">
-  <resultMap id="BaseResultMap" type="keywords.clue.model.User">
-    <id column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+<mapper namespace="clue.dao.ClPushLogDao">
+  <resultMap id="BaseResultMap" type="clue.model.ClPushLog">
+    <id column="pid" jdbcType="BIGINT" property="pid" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="cl_id" jdbcType="BIGINT" property="clId" />
+    <result column="oid" jdbcType="BIGINT" property="oid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, username, `password`, createtime, lasttime
+    pid, createtime, lasttime, `status`, cl_id, oid
   </sql>
-  <select id="selectByExample" parameterType="keywords.clue.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="clue.model.ClPushLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from user
+    from cl_push_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,76 +92,76 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
-    where `uid` = #{uid,jdbcType=INTEGER}
+    from cl_push_log
+    where pid = #{pid,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where `uid` = #{uid,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from cl_push_log
+    where pid = #{pid,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="keywords.clue.model.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="clue.model.ClPushLogExample">
+    delete from cl_push_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="keywords.clue.model.User" useGeneratedKeys="true">
-    insert into user (username, `password`, createtime, 
-      lasttime)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{lasttime,jdbcType=TIMESTAMP})
+  <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="clue.model.ClPushLog" useGeneratedKeys="true">
+    insert into cl_push_log (createtime, lasttime, `status`, 
+      cl_id, oid)
+    values (#{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+      #{clId,jdbcType=BIGINT}, #{oid,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="keywords.clue.model.User" useGeneratedKeys="true">
-    insert into user
+  <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="clue.model.ClPushLog" useGeneratedKeys="true">
+    insert into cl_push_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
-      </if>
-      <if test="password != null">
-        `password`,
-      </if>
       <if test="createtime != null">
         createtime,
       </if>
       <if test="lasttime != null">
         lasttime,
       </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="clId != null">
+        cl_id,
+      </if>
+      <if test="oid != null">
+        oid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="lasttime != null">
         #{lasttime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clId != null">
+        #{clId,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null">
+        #{oid,jdbcType=BIGINT},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="keywords.clue.model.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="clue.model.ClPushLogExample" resultType="java.lang.Long">
+    select count(*) from cl_push_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update cl_push_log
     <set>
-      <if test="record.uid != null">
-        `uid` = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.password != null">
-        `password` = #{record.password,jdbcType=VARCHAR},
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=BIGINT},
       </if>
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=TIMESTAMP},
@@ -168,46 +169,60 @@
       <if test="record.lasttime != null">
         lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.clId != null">
+        cl_id = #{record.clId,jdbcType=BIGINT},
+      </if>
+      <if test="record.oid != null">
+        oid = #{record.oid,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
-    set `uid` = #{record.uid,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      `password` = #{record.password,jdbcType=VARCHAR},
+    update cl_push_log
+    set pid = #{record.pid,jdbcType=BIGINT},
       createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP}
+      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      `status` = #{record.status,jdbcType=INTEGER},
+      cl_id = #{record.clId,jdbcType=BIGINT},
+      oid = #{record.oid,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="keywords.clue.model.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="clue.model.ClPushLog">
+    update cl_push_log
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        `password` = #{password,jdbcType=VARCHAR},
-      </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="lasttime != null">
         lasttime = #{lasttime,jdbcType=TIMESTAMP},
       </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clId != null">
+        cl_id = #{clId,jdbcType=BIGINT},
+      </if>
+      <if test="oid != null">
+        oid = #{oid,jdbcType=BIGINT},
+      </if>
     </set>
-    where `uid` = #{uid,jdbcType=INTEGER}
+    where pid = #{pid,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="keywords.clue.model.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP}
-    where `uid` = #{uid,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="clue.model.ClPushLog">
+    update cl_push_log
+    set createtime = #{createtime,jdbcType=TIMESTAMP},
+      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=INTEGER},
+      cl_id = #{clId,jdbcType=BIGINT},
+      oid = #{oid,jdbcType=BIGINT}
+    where pid = #{pid,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -26,7 +26,7 @@ public class HelloWorld {
     }
 
     @ApiOperation(value = "上行body-json参数")
-    @ApiImplicitParam(name = "request-body", value = "请求实体", paramType = "body", required = true, dataType = "keywords.model.User")
+    @ApiImplicitParam(name = "request-body", value = "请求实体", paramType = "body", required = true, dataType = "keywords.clue.model.User")
     @RequestMapping(value = "/json-up",method = RequestMethod.POST)
     public User json2(@RequestBody User r){
         return r;
