@@ -19,6 +19,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 
@@ -63,20 +64,23 @@ public class ClueSrv {
     }
 
     /**
-     * 条件查询列表
-     * @return
+     *
+     * 分页获取列表
+     * @param page   页码
+     * @param number  每页条数
+     * @return  List<ClClue>
      */
-    public ClClue[] getList(){
+    public List<ClClue> getList(Integer page, Integer number){
+        page = (page<2?0:page);
+
         ClClueExample cce = new ClClueExample();
-
-
-
+        cce.setOffset((long)(page*number));
+        cce.setLimit(number);
+        cce.setOrderByClause("cl_id desc");
         ClClueExample.Criteria c = cce.createCriteria();
+        List<ClClue> list= clue_dao.selectByExample(cce);
 
-
-
-
-        return new ClClue[]{};
+        return list;
     }
 
 
