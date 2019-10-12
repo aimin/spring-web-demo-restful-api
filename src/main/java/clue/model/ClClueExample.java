@@ -1,7 +1,6 @@
 package clue.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ClClueExample {
@@ -315,52 +314,52 @@ public class ClClueExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
+        public Criteria andCreatetimeEqualTo(Long value) {
             addCriterion("createtime =", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
+        public Criteria andCreatetimeNotEqualTo(Long value) {
             addCriterion("createtime <>", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
+        public Criteria andCreatetimeGreaterThan(Long value) {
             addCriterion("createtime >", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Long value) {
             addCriterion("createtime >=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
+        public Criteria andCreatetimeLessThan(Long value) {
             addCriterion("createtime <", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeLessThanOrEqualTo(Long value) {
             addCriterion("createtime <=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
+        public Criteria andCreatetimeIn(List<Long> values) {
             addCriterion("createtime in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
+        public Criteria andCreatetimeNotIn(List<Long> values) {
             addCriterion("createtime not in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeBetween(Long value1, Long value2) {
             addCriterion("createtime between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeNotBetween(Long value1, Long value2) {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
@@ -375,52 +374,52 @@ public class ClClueExample {
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeEqualTo(Date value) {
+        public Criteria andLasttimeEqualTo(Long value) {
             addCriterion("lasttime =", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotEqualTo(Date value) {
+        public Criteria andLasttimeNotEqualTo(Long value) {
             addCriterion("lasttime <>", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeGreaterThan(Date value) {
+        public Criteria andLasttimeGreaterThan(Long value) {
             addCriterion("lasttime >", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andLasttimeGreaterThanOrEqualTo(Long value) {
             addCriterion("lasttime >=", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeLessThan(Date value) {
+        public Criteria andLasttimeLessThan(Long value) {
             addCriterion("lasttime <", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeLessThanOrEqualTo(Date value) {
+        public Criteria andLasttimeLessThanOrEqualTo(Long value) {
             addCriterion("lasttime <=", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeIn(List<Date> values) {
+        public Criteria andLasttimeIn(List<Long> values) {
             addCriterion("lasttime in", values, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotIn(List<Date> values) {
+        public Criteria andLasttimeNotIn(List<Long> values) {
             addCriterion("lasttime not in", values, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeBetween(Date value1, Date value2) {
+        public Criteria andLasttimeBetween(Long value1, Long value2) {
             addCriterion("lasttime between", value1, value2, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotBetween(Date value1, Date value2) {
+        public Criteria andLasttimeNotBetween(Long value1, Long value2) {
             addCriterion("lasttime not between", value1, value2, "lasttime");
             return (Criteria) this;
         }
@@ -562,6 +561,126 @@ public class ClClueExample {
 
         public Criteria andClLinkManNotBetween(String value1, String value2) {
             addCriterion("cl_link_man not between", value1, value2, "clLinkMan");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoIsNull() {
+            addCriterion("cl_lo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoIsNotNull() {
+            addCriterion("cl_lo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoEqualTo(Double value) {
+            addCriterion("cl_lo =", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoNotEqualTo(Double value) {
+            addCriterion("cl_lo <>", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoGreaterThan(Double value) {
+            addCriterion("cl_lo >", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoGreaterThanOrEqualTo(Double value) {
+            addCriterion("cl_lo >=", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoLessThan(Double value) {
+            addCriterion("cl_lo <", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoLessThanOrEqualTo(Double value) {
+            addCriterion("cl_lo <=", value, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoIn(List<Double> values) {
+            addCriterion("cl_lo in", values, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoNotIn(List<Double> values) {
+            addCriterion("cl_lo not in", values, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoBetween(Double value1, Double value2) {
+            addCriterion("cl_lo between", value1, value2, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLoNotBetween(Double value1, Double value2) {
+            addCriterion("cl_lo not between", value1, value2, "clLo");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaIsNull() {
+            addCriterion("cl_la is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaIsNotNull() {
+            addCriterion("cl_la is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaEqualTo(Double value) {
+            addCriterion("cl_la =", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaNotEqualTo(Double value) {
+            addCriterion("cl_la <>", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaGreaterThan(Double value) {
+            addCriterion("cl_la >", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaGreaterThanOrEqualTo(Double value) {
+            addCriterion("cl_la >=", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaLessThan(Double value) {
+            addCriterion("cl_la <", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaLessThanOrEqualTo(Double value) {
+            addCriterion("cl_la <=", value, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaIn(List<Double> values) {
+            addCriterion("cl_la in", values, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaNotIn(List<Double> values) {
+            addCriterion("cl_la not in", values, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaBetween(Double value1, Double value2) {
+            addCriterion("cl_la between", value1, value2, "clLa");
+            return (Criteria) this;
+        }
+
+        public Criteria andClLaNotBetween(Double value1, Double value2) {
+            addCriterion("cl_la not between", value1, value2, "clLa");
             return (Criteria) this;
         }
     }

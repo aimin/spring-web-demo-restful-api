@@ -19,19 +19,13 @@ import static org.junit.Assert.*;
 public class ClueTest {
 
     @Resource
-    Clue s_service;
+    ClueSrv s_service;
 
     @Test
     public void add() {
         ClClue c = new ClClue();
         c.setClType(1);
         c.setClStatus(1);
-
-
-        DateTime time = new DateTime(new Date());
-
-        c.setCreatetime(time.toDate());
-        c.setLasttime(time.toDate());
         c.setClDesc("捷达205");
         c.setClLinkMob("13552528384");
         c.setClLinkMan("张振军");

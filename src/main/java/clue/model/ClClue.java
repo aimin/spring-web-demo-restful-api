@@ -1,7 +1,6 @@
 package clue.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * cl_clue
@@ -23,9 +22,9 @@ public class ClClue implements Serializable {
      */
     private Integer clStatus;
 
-    private Date createtime;
+    private Long createtime;
 
-    private Date lasttime;
+    private Long lasttime;
 
     /**
      * 线索联系电话
@@ -36,6 +35,16 @@ public class ClClue implements Serializable {
      * 线索联系人
      */
     private String clLinkMan;
+
+    /**
+     * 坐标经度值
+     */
+    private Double clLo;
+
+    /**
+     * 坐标纬度值
+     */
+    private Double clLa;
 
     /**
      * 线索描述
@@ -68,19 +77,19 @@ public class ClClue implements Serializable {
         this.clStatus = clStatus;
     }
 
-    public Date getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLasttime() {
+    public Long getLasttime() {
         return lasttime;
     }
 
-    public void setLasttime(Date lasttime) {
+    public void setLasttime(Long lasttime) {
         this.lasttime = lasttime;
     }
 
@@ -98,6 +107,22 @@ public class ClClue implements Serializable {
 
     public void setClLinkMan(String clLinkMan) {
         this.clLinkMan = clLinkMan;
+    }
+
+    public Double getClLo() {
+        return clLo;
+    }
+
+    public void setClLo(Double clLo) {
+        this.clLo = clLo;
+    }
+
+    public Double getClLa() {
+        return clLa;
+    }
+
+    public void setClLa(Double clLa) {
+        this.clLa = clLa;
     }
 
     public String getClDesc() {
@@ -127,6 +152,8 @@ public class ClClue implements Serializable {
             && (this.getLasttime() == null ? other.getLasttime() == null : this.getLasttime().equals(other.getLasttime()))
             && (this.getClLinkMob() == null ? other.getClLinkMob() == null : this.getClLinkMob().equals(other.getClLinkMob()))
             && (this.getClLinkMan() == null ? other.getClLinkMan() == null : this.getClLinkMan().equals(other.getClLinkMan()))
+            && (this.getClLo() == null ? other.getClLo() == null : this.getClLo().equals(other.getClLo()))
+            && (this.getClLa() == null ? other.getClLa() == null : this.getClLa().equals(other.getClLa()))
             && (this.getClDesc() == null ? other.getClDesc() == null : this.getClDesc().equals(other.getClDesc()));
     }
 
@@ -141,6 +168,8 @@ public class ClClue implements Serializable {
         result = prime * result + ((getLasttime() == null) ? 0 : getLasttime().hashCode());
         result = prime * result + ((getClLinkMob() == null) ? 0 : getClLinkMob().hashCode());
         result = prime * result + ((getClLinkMan() == null) ? 0 : getClLinkMan().hashCode());
+        result = prime * result + ((getClLo() == null) ? 0 : getClLo().hashCode());
+        result = prime * result + ((getClLa() == null) ? 0 : getClLa().hashCode());
         result = prime * result + ((getClDesc() == null) ? 0 : getClDesc().hashCode());
         return result;
     }
@@ -158,6 +187,8 @@ public class ClClue implements Serializable {
         sb.append(", lasttime=").append(lasttime);
         sb.append(", clLinkMob=").append(clLinkMob);
         sb.append(", clLinkMan=").append(clLinkMan);
+        sb.append(", clLo=").append(clLo);
+        sb.append(", clLa=").append(clLa);
         sb.append(", clDesc=").append(clDesc);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

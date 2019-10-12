@@ -5,10 +5,12 @@
     <id column="cl_id" jdbcType="BIGINT" property="clId" />
     <result column="cl_type" jdbcType="INTEGER" property="clType" />
     <result column="cl_status" jdbcType="INTEGER" property="clStatus" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="createtime" jdbcType="BIGINT" property="createtime" />
+    <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
     <result column="cl_link_mob" jdbcType="CHAR" property="clLinkMob" />
     <result column="cl_link_man" jdbcType="CHAR" property="clLinkMan" />
+    <result column="cl_lo" jdbcType="DOUBLE" property="clLo" />
+    <result column="cl_la" jdbcType="DOUBLE" property="clLa" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="clue.model.ClClue">
     <result column="cl_desc" jdbcType="LONGVARCHAR" property="clDesc" />
@@ -72,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cl_id, cl_type, cl_status, createtime, lasttime, cl_link_mob, cl_link_man
+    cl_id, cl_type, cl_status, createtime, lasttime, cl_link_mob, cl_link_man, cl_lo, 
+    cl_la
   </sql>
   <sql id="Blob_Column_List">
     cl_desc
@@ -144,10 +147,12 @@
   <insert id="insert" keyColumn="cl_id" keyProperty="clId" parameterType="clue.model.ClClue" useGeneratedKeys="true">
     insert into cl_clue (cl_type, cl_status, createtime, 
       lasttime, cl_link_mob, cl_link_man, 
-      cl_desc)
-    values (#{clType,jdbcType=INTEGER}, #{clStatus,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{lasttime,jdbcType=TIMESTAMP}, #{clLinkMob,jdbcType=CHAR}, #{clLinkMan,jdbcType=CHAR}, 
-      #{clDesc,jdbcType=LONGVARCHAR})
+      cl_lo, cl_la, cl_desc
+      )
+    values (#{clType,jdbcType=INTEGER}, #{clStatus,jdbcType=INTEGER}, #{createtime,jdbcType=BIGINT}, 
+      #{lasttime,jdbcType=BIGINT}, #{clLinkMob,jdbcType=CHAR}, #{clLinkMan,jdbcType=CHAR}, 
+      #{clLo,jdbcType=DOUBLE}, #{clLa,jdbcType=DOUBLE}, #{clDesc,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="cl_id" keyProperty="clId" parameterType="clue.model.ClClue" useGeneratedKeys="true">
     insert into cl_clue
@@ -170,6 +175,12 @@
       <if test="clLinkMan != null">
         cl_link_man,
       </if>
+      <if test="clLo != null">
+        cl_lo,
+      </if>
+      <if test="clLa != null">
+        cl_la,
+      </if>
       <if test="clDesc != null">
         cl_desc,
       </if>
@@ -182,16 +193,22 @@
         #{clStatus,jdbcType=INTEGER},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        #{lasttime,jdbcType=TIMESTAMP},
+        #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="clLinkMob != null">
         #{clLinkMob,jdbcType=CHAR},
       </if>
       <if test="clLinkMan != null">
         #{clLinkMan,jdbcType=CHAR},
+      </if>
+      <if test="clLo != null">
+        #{clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="clLa != null">
+        #{clLa,jdbcType=DOUBLE},
       </if>
       <if test="clDesc != null">
         #{clDesc,jdbcType=LONGVARCHAR},
@@ -217,16 +234,22 @@
         cl_status = #{record.clStatus,jdbcType=INTEGER},
       </if>
       <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+        createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
       <if test="record.lasttime != null">
-        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{record.lasttime,jdbcType=BIGINT},
       </if>
       <if test="record.clLinkMob != null">
         cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
       </if>
       <if test="record.clLinkMan != null">
         cl_link_man = #{record.clLinkMan,jdbcType=CHAR},
+      </if>
+      <if test="record.clLo != null">
+        cl_lo = #{record.clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clLa != null">
+        cl_la = #{record.clLa,jdbcType=DOUBLE},
       </if>
       <if test="record.clDesc != null">
         cl_desc = #{record.clDesc,jdbcType=LONGVARCHAR},
@@ -241,10 +264,12 @@
     set cl_id = #{record.clId,jdbcType=BIGINT},
       cl_type = #{record.clType,jdbcType=INTEGER},
       cl_status = #{record.clStatus,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT},
       cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
       cl_link_man = #{record.clLinkMan,jdbcType=CHAR},
+      cl_lo = #{record.clLo,jdbcType=DOUBLE},
+      cl_la = #{record.clLa,jdbcType=DOUBLE},
       cl_desc = #{record.clDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -255,10 +280,12 @@
     set cl_id = #{record.clId,jdbcType=BIGINT},
       cl_type = #{record.clType,jdbcType=INTEGER},
       cl_status = #{record.clStatus,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT},
       cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
-      cl_link_man = #{record.clLinkMan,jdbcType=CHAR}
+      cl_link_man = #{record.clLinkMan,jdbcType=CHAR},
+      cl_lo = #{record.clLo,jdbcType=DOUBLE},
+      cl_la = #{record.clLa,jdbcType=DOUBLE}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -273,16 +300,22 @@
         cl_status = #{clStatus,jdbcType=INTEGER},
       </if>
       <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="clLinkMob != null">
         cl_link_mob = #{clLinkMob,jdbcType=CHAR},
       </if>
       <if test="clLinkMan != null">
         cl_link_man = #{clLinkMan,jdbcType=CHAR},
+      </if>
+      <if test="clLo != null">
+        cl_lo = #{clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="clLa != null">
+        cl_la = #{clLa,jdbcType=DOUBLE},
       </if>
       <if test="clDesc != null">
         cl_desc = #{clDesc,jdbcType=LONGVARCHAR},
@@ -294,10 +327,12 @@
     update cl_clue
     set cl_type = #{clType,jdbcType=INTEGER},
       cl_status = #{clStatus,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT},
       cl_link_mob = #{clLinkMob,jdbcType=CHAR},
       cl_link_man = #{clLinkMan,jdbcType=CHAR},
+      cl_lo = #{clLo,jdbcType=DOUBLE},
+      cl_la = #{clLa,jdbcType=DOUBLE},
       cl_desc = #{clDesc,jdbcType=LONGVARCHAR}
     where cl_id = #{clId,jdbcType=BIGINT}
   </update>
@@ -305,10 +340,12 @@
     update cl_clue
     set cl_type = #{clType,jdbcType=INTEGER},
       cl_status = #{clStatus,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT},
       cl_link_mob = #{clLinkMob,jdbcType=CHAR},
-      cl_link_man = #{clLinkMan,jdbcType=CHAR}
+      cl_link_man = #{clLinkMan,jdbcType=CHAR},
+      cl_lo = #{clLo,jdbcType=DOUBLE},
+      cl_la = #{clLa,jdbcType=DOUBLE}
     where cl_id = #{clId,jdbcType=BIGINT}
   </update>
 </mapper>
