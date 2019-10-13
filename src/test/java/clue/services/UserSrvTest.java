@@ -91,6 +91,24 @@ public class UserSrvTest {
         re = userSrv.GetList(0,2,1);
         assert re.list.get(0).getUid()>0;
 
+        re = userSrv.GetList(0,2,"13552528384");
+        assert re.list.get(0).getUid()>0;
+
+        re = userSrv.GetList(0,2,"sam");
+        assert re.list.get(0).getUid()>0;
+
+        re = userSrv.GetList(0,2,"samxx8@163.com");
+        assert re.list.get(0).getUid()>0;
+
+        re = userSrv.GetList(0,2,"2019-10-13 17:30:00","2019-10-13 17:32:00");
+        assert re.list.get(0).getUid()>0;
+
+        re = userSrv.GetList(0,2,"2019-10-","2019-10-13 17:32:00");
+        assert re.list == null;
+
+        re = userSrv.GetList(0,2,"2019-10-13 17:30:00","2019-10-13");
+        assert re.list == null;
+
 
     }
 }

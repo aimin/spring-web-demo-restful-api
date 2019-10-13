@@ -11,6 +11,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -54,21 +55,7 @@ public class UserSrv {
             return null;
         }
 
-
-        ClUserExample cue = new ClUserExample();
-        ClUserExample.Criteria c = cue.createCriteria();
-        if(C_Tool.CheckMailFormat(usernameMobEmail)){
-            //email及密码地址登录
-            c.andEmailEqualTo(usernameMobEmail);
-        }
-        else if(C_Tool.CheckMobileFormat(usernameMobEmail)){
-            //手机号密码登录
-            c.andMobileEqualTo(usernameMobEmail);
-        }
-        else{
-            //用户名及密码username登录
-            c.andUsernameEqualTo(usernameMobEmail);
-        }
+        ClUserExample cue = this.getExampleCriteria(usernameMobEmail);
 
         List<ClUser> list = clUserDao.selectByExample(cue);
         ClUser user = list.get(0);
@@ -157,7 +144,7 @@ public class UserSrv {
      */
     public C_Result<ClUser> GetList(long uid){
         if(uid<0){
-            return new C_Result<ClUser>();
+            return new C_Result<>();
         }
         ClUserExample cue = new ClUserExample();
         ClUserExample.Criteria c = cue.createCriteria();
@@ -186,11 +173,71 @@ public class UserSrv {
      * @return  List<ClClue>
      */
     public C_Result<ClUser> GetList(Integer page,Integer number,Integer status){
-        
+
         ClUserExample cue = new ClUserExample();
         ClUserExample.Criteria c = cue.createCriteria();
         c.andStatusEqualTo(status.byteValue());
         return this.GetList(page,number,cue);
+    }
+
+
+    /**
+     * 注册时间 区间查询
+     * @param page
+     * @param number
+     * @param stime
+     * @param etime
+     * @return
+     */
+    public C_Result<ClUser> GetList(Integer page,Integer number,String stime,String etime){
+        ClUserExample cue = new ClUserExample();
+        ClUserExample.Criteria c = cue.createCriteria();
+
+        long startTime = 0;
+        long endTime = 0;
+        try {
+            startTime = C_Tool.DateStrToLong(stime);
+            endTime = C_Tool.DateStrToLong(etime);
+        } catch (ParseException e) {
+            return new C_Result<>();
+        }
+
+        c.andCreatetimeBetween(startTime,endTime);
+        return this.GetList(page,number,cue);
+    }
+
+    /**
+     * 用户名、手机号、邮箱查询
+     * @param usernameMobEmail
+     * @return
+     */
+    public C_Result<ClUser> GetList(int page,int number,String usernameMobEmail){
+        return this.GetList(page,number,this.getExampleCriteria(usernameMobEmail));
+    }
+
+    /**
+     * 识别 username,mobile,email 查询条件
+     * @param usernameMobEmail
+     * @return
+     */
+    private ClUserExample getExampleCriteria(String usernameMobEmail){
+        ClUserExample cue = new ClUserExample();
+        ClUserExample.Criteria c = cue.createCriteria();
+        if(C_Tool.CheckMailFormat(usernameMobEmail)){
+            //email及密码地址登录
+            c.andEmailEqualTo(usernameMobEmail);
+        }
+        else if(C_Tool.CheckMobileFormat(usernameMobEmail)){
+            //手机号密码登录
+            c.andMobileEqualTo(usernameMobEmail);
+        }
+        else{
+            //用户名及密码username登录
+            c.andUsernameEqualTo(usernameMobEmail);
+        }
+
+        return cue;
+
     }
 
 

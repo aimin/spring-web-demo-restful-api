@@ -5,6 +5,9 @@ import clue.model.C_IfExample;
 import clue.model.ClClue;
 import org.springframework.util.DigestUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -132,6 +135,26 @@ public class C_Tool {
         return result;
 
     }
+
+
+    /**
+     * 日期 转 long 时间戳
+     * @param datetimestr
+     * @return
+     * @throws ParseException
+     */
+    public static long DateStrToLong(String datetimestr) throws ParseException {
+        return DateStrToLong(datetimestr,"yyyy-MM-dd HH:mm:ss");
+    }
+
+    public static long DateStrToLong(String datetimestr,String fmStr) throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(fmStr);
+        Date date = null;
+        date = simpleDateFormat.parse(datetimestr);
+        return date.getTime();
+    }
+
+
 
 
 }
