@@ -1,6 +1,7 @@
 package clue.services;
 
 import clue.model.ClClue;
+import clue.util.C_Result;
 import keywords.SamApplication;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -16,10 +17,10 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SamApplication.class)
-public class ClueTest {
+public class ClueSrvTest {
 
     @Resource
-    ClueSrv s_service;
+    ClueSrv clueSrv;
 
     @Test
     public void add() {
@@ -31,8 +32,23 @@ public class ClueTest {
         c.setClLinkMan("张振军");
 
 
-        ClClue[] cs = s_service.Add(new ClClue[]{c});
+        ClClue[] cs = clueSrv.Add(new ClClue[]{c});
 
         assert (cs[0].getClId()>0);
+    }
+
+
+    @Test
+    public void TestGetList(){
+        C_Result<ClClue> re = clueSrv.GetList(0,2);
+        assert(re.count>0);
+        long cl_id = re.list.get(0).getClId();
+
+        re = clueSrv.GetList(0,1,1);
+        assert(re.count>0);
+
+        re = clueSrv.GetList(cl_id);
+        assert(re.count>0);
+
     }
 }
