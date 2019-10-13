@@ -1,10 +1,8 @@
 package clue.services;
 
+import clue.dao.ClOrgUserDao;
 import clue.dao.ClUserDao;
-import clue.model.ClClue;
-import clue.model.ClClueExample;
-import clue.model.ClUser;
-import clue.model.ClUserExample;
+import clue.model.*;
 import clue.util.C_Result;
 import clue.util.C_Tool;
 import org.joda.time.DateTime;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +20,9 @@ public class UserSrv {
 
     @Resource
     ClUserDao clUserDao;
+
+    @Resource
+    ClOrgUserDao clOrgUserDao;
 
     public ClUser WxLogin(String wxCode){
         //todo 根据wxcode换取openid,accesstoken
@@ -246,8 +248,34 @@ public class UserSrv {
     }
 
 
-    //todo 查询机构用户
+    /**
+     * 查询机构用户
+     * @param page
+     * @param number
+     * @param oid   机构id
+     * @return
+     */
+    public C_Result<ClUser> GetListByOid(int page,int number,int oid){
 
+        if(oid<0 || number<1){
+            return new C_Result<>();
+        }
+
+        ClOrgUserExample coe = new ClOrgUserExample();
+        ClOrgUserExample.Criteria c1 = coe.createCriteria();
+        c1.andOidEqualTo(oid);
+        List<ClOrgUser> clOrgUsers = clOrgUserDao.selectByExample(coe);
+        List<Long> uids = new ArrayList<>();
+        for (ClOrgUser clOrgUser:clOrgUsers) {
+            uids.add(clOrgUser.getUid());
+        }
+
+        ClUserExample cue = new ClUserExample();
+        ClUserExample.Criteria c = cue.createCriteria();
+        c.andUidIn(uids);
+
+        return this.GetList(page,number,cue);
+    }
 
 
 }

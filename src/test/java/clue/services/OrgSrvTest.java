@@ -3,6 +3,7 @@ package clue.services;
 import clue.dao.ClTradeOrgDao;
 import clue.model.ClOrgUser;
 import clue.model.ClTradeOrg;
+import clue.model.ClUser;
 import clue.util.C_Result;
 import keywords.SamApplication;
 import org.junit.Test;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -23,6 +26,9 @@ public class OrgSrvTest {
 
     @Resource
     ClTradeOrgDao clTradeOrgDao;
+
+    @Resource
+    UserSrv userSrv;
 
 
     @Test
@@ -42,10 +48,18 @@ public class OrgSrvTest {
 
     @Test
     public void updateOrgUser(){
-        ClOrgUser cou = orgSrv.AddUser(2,5);
+        int oid = 2;
+        ClOrgUser cou = orgSrv.AddUser(oid,1);
+        assert cou.getId() > 0;
+        cou = orgSrv.AddUser(oid,2);
         assert cou.getId() > 0;
 
-        int n = orgSrv.DelUser(2,5);
+        C_Result<ClUser> re = userSrv.GetListByOid(0,1,oid);
+        assert re.list.size()>0;
+
+        int n = orgSrv.DelUser(oid,1);
+        assert n>0;
+        n = orgSrv.DelUser(oid,2);
         assert n>0;
     }
 

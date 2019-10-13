@@ -5,6 +5,7 @@ import clue.model.ClUserExample;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface ClUserDao extends C_IfDao {
     long countByExample(ClUserExample example);
@@ -28,4 +29,9 @@ public interface ClUserDao extends C_IfDao {
     int updateByPrimaryKeySelective(ClUser record);
 
     int updateByPrimaryKey(ClUser record);
+
+
+
+
+
 }
