@@ -72,6 +72,9 @@ public class UserSrv {
      * @param uid
      */
     public void Enable(long uid){
+        if(uid<0){
+            return;
+        }
         ClUser user = new ClUser();
         user.setUid(uid);
         user.setStatus(new Integer(1).byteValue());
@@ -83,6 +86,9 @@ public class UserSrv {
      * @param uid
      */
     public void Disable(long uid){
+        if(uid <0 ){
+            return;
+        }
         ClUser user = new ClUser();
         user.setUid(uid);
         user.setStatus(new Integer(-1).byteValue());

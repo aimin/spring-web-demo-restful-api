@@ -77,6 +77,14 @@ public class UserSrvTest {
         user.setMobile("13888665555");
         int n = userSrv.Update(user);
         assert n>0;
+
+        userSrv.Enable(25);
+        C_Result<ClUser> re = userSrv.GetList(25);
+        assert re.list.get(0).getStatus()==1;
+
+        userSrv.Disable(25);
+        re = userSrv.GetList(25);
+        assert re.list.get(0).getStatus()==-1;
     }
 
     @Test

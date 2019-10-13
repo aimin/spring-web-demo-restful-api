@@ -1,8 +1,8 @@
 package clue.dao;
 
-import java.util.List;
 import clue.model.ClTradeOrg;
 import clue.model.ClTradeOrgExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClTradeOrgDao {
