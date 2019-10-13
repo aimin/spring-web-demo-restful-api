@@ -1,6 +1,7 @@
 package clue.services;
 
 import clue.model.ClUser;
+import clue.util.C_Result;
 import clue.util.C_Tool;
 import keywords.SamApplication;
 import org.junit.Test;
@@ -10,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -76,5 +77,20 @@ public class UserSrvTest {
         user.setMobile("13888665555");
         int n = userSrv.Update(user);
         assert n>0;
+    }
+
+    @Test
+    public void TestGetList(){
+        C_Result<ClUser> re = userSrv.GetList(25);
+        assert re.list.get(0).getUid()>0;
+
+        re = userSrv.GetList(0,2);
+        assert re.list.get(0).getUid()>0;
+
+
+        re = userSrv.GetList(0,2,1);
+        assert re.list.get(0).getUid()>0;
+
+
     }
 }

@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 /**
  * cl_clue
- * @author 
+ * @author
  */
 public class ClClue implements Serializable {
     /**
-     * 线索id 
+     * 线索id
      */
     private Long clId;
 
@@ -18,7 +18,7 @@ public class ClClue implements Serializable {
     private Integer clType;
 
     /**
-     * 线索状态：-1.删除 1.新建 2.成功推送 3.采纳 4.实现增值 5.无平台采纳 
+     * 线索状态：-1.删除 1.新建 2.成功推送 3.采纳 4.实现增值 5.无平台采纳
      */
     private Integer clStatus;
 
@@ -194,4 +194,6 @@ public class ClClue implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+
 }

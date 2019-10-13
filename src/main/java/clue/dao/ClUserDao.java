@@ -3,9 +3,10 @@ package clue.dao;
 import clue.model.ClUser;
 import clue.model.ClUserExample;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-public interface ClUserDao {
+public interface ClUserDao extends C_IfDao {
     long countByExample(ClUserExample example);
 
     int deleteByExample(ClUserExample example);

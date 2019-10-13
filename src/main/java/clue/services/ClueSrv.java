@@ -4,6 +4,7 @@ import clue.dao.ClClueDao;
 import clue.model.ClClue;
 import clue.model.ClClueExample;
 import clue.util.C_Result;
+import clue.util.C_Tool;
 import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -84,22 +85,7 @@ public class ClueSrv {
      * @return
      */
     public C_Result<ClClue> GetList(Integer page, Integer number,ClClueExample cce){
-        if(number<=0){
-            return new C_Result<ClClue>();
-        }
-
-        page = (page<2?0:page);
-
-        cce.setOffset((long)(page*number));
-        cce.setLimit(number);
-        List<ClClue> list= clue_dao.selectByExample(cce);
-
-        C_Result result = new C_Result<ClClue>();
-        result.list = list;
-        result.count = clue_dao.countByExample(cce);
-        result.pageCount = (long)Math.ceil((double)result.count/number);
-
-        return result;
+        return  C_Tool.GetList(page,number,clue_dao,cce);
     }
 
     /**

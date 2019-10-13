@@ -1,8 +1,11 @@
 package clue.services;
 
 import clue.dao.ClUserDao;
+import clue.model.ClClue;
+import clue.model.ClClueExample;
 import clue.model.ClUser;
 import clue.model.ClUserExample;
+import clue.util.C_Result;
 import clue.util.C_Tool;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -23,19 +26,19 @@ public class UserSrv {
         //todo 检查openid是否存在,以决定更新还是新建用户
 
 
-        return new ClUser();
+        return null;
     }
 
     public ClUser MobLogin(String mobCode){
         //todo 手机验证码code是否有效
         //todo 检查手机号是否存在，以决定更新或新建用户
 
-        return new ClUser();
+        return null;
     }
 
     public ClUser EmailLogin(String EmailCode){
         //todo 邮箱登录
-        return new ClUser();
+        return null;
     }
 
 
@@ -78,6 +81,28 @@ public class UserSrv {
     }
 
     /**
+     * 启用用户
+     * @param uid
+     */
+    public void Enable(long uid){
+        ClUser user = new ClUser();
+        user.setUid(uid);
+        user.setStatus(new Integer(1).byteValue());
+        this.Update(user);
+    }
+
+    /**
+     * 禁用用户
+     * @param uid
+     */
+    public void Disable(long uid){
+        ClUser user = new ClUser();
+        user.setUid(uid);
+        user.setStatus(new Integer(-1).byteValue());
+        this.Update(user);
+    }
+
+    /**
      * 更新用户信息
      * @param user
      * @return
@@ -111,6 +136,61 @@ public class UserSrv {
         }
 
         return null;
+    }
+
+
+    /**
+     * 分页条件查询
+     * @param page
+     * @param number
+     * @param cue
+     * @return
+     */
+    public C_Result<ClUser> GetList(Integer page, Integer number, ClUserExample cue){
+        return  C_Tool.GetList(page,number,clUserDao,cue);
+    }
+
+    /**
+     * 用户id查询
+     * @param uid
+     * @return  List<ClClue>
+     */
+    public C_Result<ClUser> GetList(long uid){
+        if(uid<0){
+            return new C_Result<ClUser>();
+        }
+        ClUserExample cue = new ClUserExample();
+        ClUserExample.Criteria c = cue.createCriteria();
+        c.andUidEqualTo(uid);
+
+        return this.GetList(0,10,cue);
+    }
+
+    /**
+     * 分页获取列表
+     * @param page   页码
+     * @param number  每页条数
+     * @return  List<ClClue>
+     */
+    public C_Result<ClUser> GetList(Integer page,Integer number){
+        ClUserExample cue = new ClUserExample();
+        cue.setOrderByClause("uid desc");
+        return this.GetList(page,number,cue);
+    }
+
+    /**
+     * 线索状态分页查询
+     * @param page   页码
+     * @param number  每页条数
+     * @param status 状态值 1启用 2禁用
+     * @return  List<ClClue>
+     */
+    public C_Result<ClUser> GetList(Integer page,Integer number,Integer status){
+        
+        ClUserExample cue = new ClUserExample();
+        ClUserExample.Criteria c = cue.createCriteria();
+        c.andStatusEqualTo(status.byteValue());
+        return this.GetList(page,number,cue);
     }
 
 

@@ -5,7 +5,7 @@ import clue.model.ClClueExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface ClClueDao {
+public interface ClClueDao extends C_IfDao {
     long countByExample(ClClueExample example);
 
     int deleteByExample(ClClueExample example);

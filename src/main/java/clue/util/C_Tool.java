@@ -1,8 +1,11 @@
 package clue.util;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import clue.dao.C_IfDao;
+import clue.model.C_IfExample;
+import clue.model.ClClue;
 import org.springframework.util.DigestUtils;
 
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -98,6 +101,36 @@ public class C_Tool {
             sb.append(str.charAt(number));
         }
         return sb.toString();
+    }
+
+
+    /**
+     * 分页条件查询
+     * @param page
+     * @param number
+     * @param example
+     * @return
+     */
+    public static  <O> C_Result<O> GetList(Integer page, Integer number, C_IfDao<O, C_IfExample> dao, C_IfExample example){
+
+        if(number<=0){
+            return new C_Result<>();
+        }
+
+        page = (page<2?0:page);
+
+        example.setOffset((long)(page*number));
+        example.setLimit(number);
+
+        List<O> list= dao.selectByExample(example);
+
+        C_Result result = new C_Result<ClClue>();
+        result.list = list;
+        result.count = dao.countByExample(example);
+        result.pageCount = (long)Math.ceil((double)result.count/number);
+
+        return result;
+
     }
 
 

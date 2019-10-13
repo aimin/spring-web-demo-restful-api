@@ -3,7 +3,7 @@ package clue.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClClueExample {
+public class ClClueExample implements C_IfExample{
     protected String orderByClause;
 
     protected boolean distinct;
