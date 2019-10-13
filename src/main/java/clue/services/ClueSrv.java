@@ -33,7 +33,7 @@ public class ClueSrv {
     ClClueDao clue_dao;
 
     /**
-     * 添加线索
+     * 批量添加线索
      * @param clClues
      * @return
      */
@@ -48,6 +48,24 @@ public class ClueSrv {
 
         return clClues;
     }
+
+    /**
+     * 添加线索
+     * @param clClue
+     * @return
+     */
+    public ClClue Add(ClClue clClue){
+        clClue.setCreatetime(DateTime.now().getMillis());
+        clClue.setLasttime(DateTime.now().getMillis());
+        int id = clue_dao.insert(clClue);
+        clClue.setClId((long)id);
+        int n = clue_dao.insert(clClue);
+        if(n>0){
+            return clClue;
+        }
+        return null;
+    }
+
 
     /**
      * 逻辑删除
