@@ -5,10 +5,8 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="oid" jdbcType="INTEGER" property="oid" />
     <result column="uid" jdbcType="BIGINT" property="uid" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="clue.model.ClOrgUserWithBLOBs">
-    <result column="createtime" jdbcType="LONGVARCHAR" property="createtime" />
-    <result column="lasttime" jdbcType="LONGVARCHAR" property="lasttime" />
+    <result column="createtime" jdbcType="BIGINT" property="createtime" />
+    <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,35 +67,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, oid, `uid`
+    id, oid, `uid`, createtime, lasttime
   </sql>
-  <sql id="Blob_Column_List">
-    createtime, lasttime
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="clue.model.ClOrgUserExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from cl_org_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
   <select id="selectByExample" parameterType="clue.model.ClOrgUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -120,11 +91,9 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from cl_org_user
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -138,13 +107,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="clue.model.ClOrgUserWithBLOBs" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="clue.model.ClOrgUser" useGeneratedKeys="true">
     insert into cl_org_user (oid, `uid`, createtime, 
       lasttime)
-    values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{createtime,jdbcType=LONGVARCHAR}, 
-      #{lasttime,jdbcType=LONGVARCHAR})
+    values (#{oid,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, #{createtime,jdbcType=BIGINT}, 
+      #{lasttime,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="clue.model.ClOrgUserWithBLOBs" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="clue.model.ClOrgUser" useGeneratedKeys="true">
     insert into cl_org_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="oid != null">
@@ -168,10 +137,10 @@
         #{uid,jdbcType=BIGINT},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=LONGVARCHAR},
+        #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        #{lasttime,jdbcType=LONGVARCHAR},
+        #{lasttime,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -194,23 +163,12 @@
         `uid` = #{record.uid,jdbcType=BIGINT},
       </if>
       <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=LONGVARCHAR},
+        createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
       <if test="record.lasttime != null">
-        lasttime = #{record.lasttime,jdbcType=LONGVARCHAR},
+        lasttime = #{record.lasttime,jdbcType=BIGINT},
       </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update cl_org_user
-    set id = #{record.id,jdbcType=BIGINT},
-      oid = #{record.oid,jdbcType=INTEGER},
-      `uid` = #{record.uid,jdbcType=BIGINT},
-      createtime = #{record.createtime,jdbcType=LONGVARCHAR},
-      lasttime = #{record.lasttime,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -219,12 +177,14 @@
     update cl_org_user
     set id = #{record.id,jdbcType=BIGINT},
       oid = #{record.oid,jdbcType=INTEGER},
-      `uid` = #{record.uid,jdbcType=BIGINT}
+      `uid` = #{record.uid,jdbcType=BIGINT},
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="clue.model.ClOrgUserWithBLOBs">
+  <update id="updateByPrimaryKeySelective" parameterType="clue.model.ClOrgUser">
     update cl_org_user
     <set>
       <if test="oid != null">
@@ -234,26 +194,20 @@
         `uid` = #{uid,jdbcType=BIGINT},
       </if>
       <if test="createtime != null">
-        createtime = #{createtime,jdbcType=LONGVARCHAR},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=LONGVARCHAR},
+        lasttime = #{lasttime,jdbcType=BIGINT},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="clue.model.ClOrgUserWithBLOBs">
-    update cl_org_user
-    set oid = #{oid,jdbcType=INTEGER},
-      `uid` = #{uid,jdbcType=BIGINT},
-      createtime = #{createtime,jdbcType=LONGVARCHAR},
-      lasttime = #{lasttime,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="clue.model.ClOrgUser">
     update cl_org_user
     set oid = #{oid,jdbcType=INTEGER},
-      `uid` = #{uid,jdbcType=BIGINT}
+      `uid` = #{uid,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

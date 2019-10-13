@@ -1,10 +1,9 @@
 package clue.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class ClTradeOrgExample {
+public class ClTradeOrgExample implements C_IfExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -405,52 +404,52 @@ public class ClTradeOrgExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
+        public Criteria andStatusEqualTo(Byte value) {
             addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
+        public Criteria andStatusNotEqualTo(Byte value) {
             addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
+        public Criteria andStatusGreaterThan(Byte value) {
             addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
             addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
+        public Criteria andStatusLessThan(Byte value) {
             addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+        public Criteria andStatusLessThanOrEqualTo(Byte value) {
             addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
+        public Criteria andStatusIn(List<Byte> values) {
             addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
+        public Criteria andStatusNotIn(List<Byte> values) {
             addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
+        public Criteria andStatusBetween(Byte value1, Byte value2) {
             addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
             addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
@@ -605,52 +604,52 @@ public class ClTradeOrgExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
+        public Criteria andCreatetimeEqualTo(Long value) {
             addCriterion("createtime =", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
+        public Criteria andCreatetimeNotEqualTo(Long value) {
             addCriterion("createtime <>", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
+        public Criteria andCreatetimeGreaterThan(Long value) {
             addCriterion("createtime >", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Long value) {
             addCriterion("createtime >=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
+        public Criteria andCreatetimeLessThan(Long value) {
             addCriterion("createtime <", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeLessThanOrEqualTo(Long value) {
             addCriterion("createtime <=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
+        public Criteria andCreatetimeIn(List<Long> values) {
             addCriterion("createtime in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
+        public Criteria andCreatetimeNotIn(List<Long> values) {
             addCriterion("createtime not in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeBetween(Long value1, Long value2) {
             addCriterion("createtime between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeNotBetween(Long value1, Long value2) {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
@@ -665,52 +664,52 @@ public class ClTradeOrgExample {
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeEqualTo(Date value) {
+        public Criteria andLasttimeEqualTo(Long value) {
             addCriterion("lasttime =", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotEqualTo(Date value) {
+        public Criteria andLasttimeNotEqualTo(Long value) {
             addCriterion("lasttime <>", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeGreaterThan(Date value) {
+        public Criteria andLasttimeGreaterThan(Long value) {
             addCriterion("lasttime >", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andLasttimeGreaterThanOrEqualTo(Long value) {
             addCriterion("lasttime >=", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeLessThan(Date value) {
+        public Criteria andLasttimeLessThan(Long value) {
             addCriterion("lasttime <", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeLessThanOrEqualTo(Date value) {
+        public Criteria andLasttimeLessThanOrEqualTo(Long value) {
             addCriterion("lasttime <=", value, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeIn(List<Date> values) {
+        public Criteria andLasttimeIn(List<Long> values) {
             addCriterion("lasttime in", values, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotIn(List<Date> values) {
+        public Criteria andLasttimeNotIn(List<Long> values) {
             addCriterion("lasttime not in", values, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeBetween(Date value1, Date value2) {
+        public Criteria andLasttimeBetween(Long value1, Long value2) {
             addCriterion("lasttime between", value1, value2, "lasttime");
             return (Criteria) this;
         }
 
-        public Criteria andLasttimeNotBetween(Date value1, Date value2) {
+        public Criteria andLasttimeNotBetween(Long value1, Long value2) {
             addCriterion("lasttime not between", value1, value2, "lasttime");
             return (Criteria) this;
         }

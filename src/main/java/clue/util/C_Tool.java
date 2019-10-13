@@ -155,6 +155,20 @@ public class C_Tool {
     }
 
 
+    /**
+     * 是否为数字
+     * @param str
+     * @return
+     */
+    public static boolean IsNumeric(String str){
+        for (int i = str.length();--i>=0;){
+            if (!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
 }

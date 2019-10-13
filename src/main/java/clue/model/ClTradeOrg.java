@@ -1,7 +1,6 @@
 package clue.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * cl_trade_org
@@ -29,9 +28,9 @@ public class ClTradeOrg implements Serializable {
     private String linktel;
 
     /**
-     * 机构状态：1正常，2无效
+     * 机构状态：1正常，-1无效
      */
-    private Integer status;
+    private Byte status;
 
     /**
      * 推送前的md5排重接口
@@ -43,9 +42,9 @@ public class ClTradeOrg implements Serializable {
      */
     private String pushUrl;
 
-    private Date createtime;
+    private Long createtime;
 
-    private Date lasttime;
+    private Long lasttime;
 
     /**
      * 推送数据签名密钥
@@ -86,11 +85,11 @@ public class ClTradeOrg implements Serializable {
         this.linktel = linktel;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -110,19 +109,19 @@ public class ClTradeOrg implements Serializable {
         this.pushUrl = pushUrl;
     }
 
-    public Date getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLasttime() {
+    public Long getLasttime() {
         return lasttime;
     }
 
-    public void setLasttime(Date lasttime) {
+    public void setLasttime(Long lasttime) {
         this.lasttime = lasttime;
     }
 

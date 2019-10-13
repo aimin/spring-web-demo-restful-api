@@ -124,7 +124,6 @@ public class UserSrv {
 
         long id = clUserDao.insert(user);
         if(id>0){
-            user.setUid(id);
             return user;
         }
 
@@ -245,6 +244,10 @@ public class UserSrv {
         return cue;
 
     }
+
+
+    //todo 查询机构用户
+
 
 
 }

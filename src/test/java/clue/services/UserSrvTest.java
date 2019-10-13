@@ -78,18 +78,18 @@ public class UserSrvTest {
         int n = userSrv.Update(user);
         assert n>0;
 
-        userSrv.Enable(25);
-        C_Result<ClUser> re = userSrv.GetList(25);
+        userSrv.Enable(1);
+        C_Result<ClUser> re = userSrv.GetList(1);
         assert re.list.get(0).getStatus()==1;
 
-        userSrv.Disable(25);
-        re = userSrv.GetList(25);
+        userSrv.Disable(1);
+        re = userSrv.GetList(1);
         assert re.list.get(0).getStatus()==-1;
     }
 
     @Test
     public void TestGetList(){
-        C_Result<ClUser> re = userSrv.GetList(25);
+        C_Result<ClUser> re = userSrv.GetList(1);
         assert re.list.get(0).getUid()>0;
 
         re = userSrv.GetList(0,2);

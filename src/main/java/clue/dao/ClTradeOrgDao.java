@@ -5,7 +5,7 @@ import clue.model.ClTradeOrgExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface ClTradeOrgDao {
+public interface ClTradeOrgDao extends C_IfDao {
     long countByExample(ClTradeOrgExample example);
 
     int deleteByExample(ClTradeOrgExample example);

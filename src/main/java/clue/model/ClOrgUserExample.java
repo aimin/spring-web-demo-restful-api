@@ -303,6 +303,126 @@ public class ClOrgUserExample {
             addCriterion("`uid` not between", value1, value2, "uid");
             return (Criteria) this;
         }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(Long value) {
+            addCriterion("createtime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(Long value) {
+            addCriterion("createtime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(Long value) {
+            addCriterion("createtime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("createtime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(Long value) {
+            addCriterion("createtime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(Long value) {
+            addCriterion("createtime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<Long> values) {
+            addCriterion("createtime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<Long> values) {
+            addCriterion("createtime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(Long value1, Long value2) {
+            addCriterion("createtime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(Long value1, Long value2) {
+            addCriterion("createtime not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeIsNull() {
+            addCriterion("lasttime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeIsNotNull() {
+            addCriterion("lasttime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeEqualTo(Long value) {
+            addCriterion("lasttime =", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeNotEqualTo(Long value) {
+            addCriterion("lasttime <>", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeGreaterThan(Long value) {
+            addCriterion("lasttime >", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("lasttime >=", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeLessThan(Long value) {
+            addCriterion("lasttime <", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeLessThanOrEqualTo(Long value) {
+            addCriterion("lasttime <=", value, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeIn(List<Long> values) {
+            addCriterion("lasttime in", values, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeNotIn(List<Long> values) {
+            addCriterion("lasttime not in", values, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeBetween(Long value1, Long value2) {
+            addCriterion("lasttime between", value1, value2, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLasttimeNotBetween(Long value1, Long value2) {
+            addCriterion("lasttime not between", value1, value2, "lasttime");
+            return (Criteria) this;
+        }
     }
 
     /**

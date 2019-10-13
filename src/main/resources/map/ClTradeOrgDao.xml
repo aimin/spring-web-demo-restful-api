@@ -6,11 +6,11 @@
     <result column="oname" jdbcType="VARCHAR" property="oname" />
     <result column="linkman" jdbcType="VARCHAR" property="linkman" />
     <result column="linktel" jdbcType="CHAR" property="linktel" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="chk_dup_url" jdbcType="VARCHAR" property="chkDupUrl" />
     <result column="push_url" jdbcType="VARCHAR" property="pushUrl" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="createtime" jdbcType="BIGINT" property="createtime" />
+    <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
     <result column="push_secret" jdbcType="VARCHAR" property="pushSecret" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -119,8 +119,8 @@
       createtime, lasttime, push_secret
       )
     values (#{oname,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, #{linktel,jdbcType=CHAR}, 
-      #{status,jdbcType=INTEGER}, #{chkDupUrl,jdbcType=VARCHAR}, #{pushUrl,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}, #{pushSecret,jdbcType=VARCHAR}
+      #{status,jdbcType=TINYINT}, #{chkDupUrl,jdbcType=VARCHAR}, #{pushUrl,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT}, #{lasttime,jdbcType=BIGINT}, #{pushSecret,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" keyColumn="oid" keyProperty="oid" parameterType="clue.model.ClTradeOrg" useGeneratedKeys="true">
@@ -165,7 +165,7 @@
         #{linktel,jdbcType=CHAR},
       </if>
       <if test="status != null">
-        #{status,jdbcType=INTEGER},
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="chkDupUrl != null">
         #{chkDupUrl,jdbcType=VARCHAR},
@@ -174,10 +174,10 @@
         #{pushUrl,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        #{lasttime,jdbcType=TIMESTAMP},
+        #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="pushSecret != null">
         #{pushSecret,jdbcType=VARCHAR},
@@ -206,7 +206,7 @@
         linktel = #{record.linktel,jdbcType=CHAR},
       </if>
       <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
+        `status` = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.chkDupUrl != null">
         chk_dup_url = #{record.chkDupUrl,jdbcType=VARCHAR},
@@ -215,10 +215,10 @@
         push_url = #{record.pushUrl,jdbcType=VARCHAR},
       </if>
       <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+        createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
       <if test="record.lasttime != null">
-        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{record.lasttime,jdbcType=BIGINT},
       </if>
       <if test="record.pushSecret != null">
         push_secret = #{record.pushSecret,jdbcType=VARCHAR},
@@ -234,11 +234,11 @@
       oname = #{record.oname,jdbcType=VARCHAR},
       linkman = #{record.linkman,jdbcType=VARCHAR},
       linktel = #{record.linktel,jdbcType=CHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=TINYINT},
       chk_dup_url = #{record.chkDupUrl,jdbcType=VARCHAR},
       push_url = #{record.pushUrl,jdbcType=VARCHAR},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT},
       push_secret = #{record.pushSecret,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -257,7 +257,7 @@
         linktel = #{linktel,jdbcType=CHAR},
       </if>
       <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=TINYINT},
       </if>
       <if test="chkDupUrl != null">
         chk_dup_url = #{chkDupUrl,jdbcType=VARCHAR},
@@ -266,10 +266,10 @@
         push_url = #{pushUrl,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="pushSecret != null">
         push_secret = #{pushSecret,jdbcType=VARCHAR},
@@ -282,11 +282,11 @@
     set oname = #{oname,jdbcType=VARCHAR},
       linkman = #{linkman,jdbcType=VARCHAR},
       linktel = #{linktel,jdbcType=CHAR},
-      `status` = #{status,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=TINYINT},
       chk_dup_url = #{chkDupUrl,jdbcType=VARCHAR},
       push_url = #{pushUrl,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP},
+      createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT},
       push_secret = #{pushSecret,jdbcType=VARCHAR}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
