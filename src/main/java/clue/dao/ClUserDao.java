@@ -1,8 +1,8 @@
 package clue.dao;
 
-import java.util.List;
 import clue.model.ClUser;
 import clue.model.ClUserExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClUserDao {

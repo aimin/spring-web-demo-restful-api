@@ -1,7 +1,6 @@
 package clue.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * cl_user
@@ -22,6 +21,11 @@ public class ClUser implements Serializable {
      * 手机
      */
     private String mobile;
+
+    /**
+     * 邮箱
+     */
+    private String email;
 
     /**
      * 密码
@@ -46,12 +50,27 @@ public class ClUser implements Serializable {
     /**
      * 创建时间
      */
-    private Date createtime;
+    private Long createtime;
 
     /**
      * 最后修改时间
      */
-    private Date lasttime;
+    private Long lasttime;
+
+    /**
+     * 注册坐标经
+     */
+    private Double clLo;
+
+    /**
+     * 注册坐标纬
+     */
+    private Double clLa;
+
+    /**
+     * 状态：1 启用 -1禁用
+     */
+    private Byte status;
 
     private static final long serialVersionUID = 1L;
 
@@ -77,6 +96,14 @@ public class ClUser implements Serializable {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -111,20 +138,44 @@ public class ClUser implements Serializable {
         this.thirdExtInfo = thirdExtInfo;
     }
 
-    public Date getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLasttime() {
+    public Long getLasttime() {
         return lasttime;
     }
 
-    public void setLasttime(Date lasttime) {
+    public void setLasttime(Long lasttime) {
         this.lasttime = lasttime;
+    }
+
+    public Double getClLo() {
+        return clLo;
+    }
+
+    public void setClLo(Double clLo) {
+        this.clLo = clLo;
+    }
+
+    public Double getClLa() {
+        return clLa;
+    }
+
+    public void setClLa(Double clLa) {
+        this.clLa = clLa;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     @Override
@@ -142,12 +193,16 @@ public class ClUser implements Serializable {
         return (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getMobile() == null ? other.getMobile() == null : this.getMobile().equals(other.getMobile()))
+            && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
             && (this.getThirdOpenid() == null ? other.getThirdOpenid() == null : this.getThirdOpenid().equals(other.getThirdOpenid()))
             && (this.getThirdSessionkey() == null ? other.getThirdSessionkey() == null : this.getThirdSessionkey().equals(other.getThirdSessionkey()))
             && (this.getThirdExtInfo() == null ? other.getThirdExtInfo() == null : this.getThirdExtInfo().equals(other.getThirdExtInfo()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
-            && (this.getLasttime() == null ? other.getLasttime() == null : this.getLasttime().equals(other.getLasttime()));
+            && (this.getLasttime() == null ? other.getLasttime() == null : this.getLasttime().equals(other.getLasttime()))
+            && (this.getClLo() == null ? other.getClLo() == null : this.getClLo().equals(other.getClLo()))
+            && (this.getClLa() == null ? other.getClLa() == null : this.getClLa().equals(other.getClLa()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
     @Override
@@ -157,12 +212,16 @@ public class ClUser implements Serializable {
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
         result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
         result = prime * result + ((getMobile() == null) ? 0 : getMobile().hashCode());
+        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getThirdOpenid() == null) ? 0 : getThirdOpenid().hashCode());
         result = prime * result + ((getThirdSessionkey() == null) ? 0 : getThirdSessionkey().hashCode());
         result = prime * result + ((getThirdExtInfo() == null) ? 0 : getThirdExtInfo().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getLasttime() == null) ? 0 : getLasttime().hashCode());
+        result = prime * result + ((getClLo() == null) ? 0 : getClLo().hashCode());
+        result = prime * result + ((getClLa() == null) ? 0 : getClLa().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         return result;
     }
 
@@ -175,12 +234,16 @@ public class ClUser implements Serializable {
         sb.append(", uid=").append(uid);
         sb.append(", username=").append(username);
         sb.append(", mobile=").append(mobile);
+        sb.append(", email=").append(email);
         sb.append(", password=").append(password);
         sb.append(", thirdOpenid=").append(thirdOpenid);
         sb.append(", thirdSessionkey=").append(thirdSessionkey);
         sb.append(", thirdExtInfo=").append(thirdExtInfo);
         sb.append(", createtime=").append(createtime);
         sb.append(", lasttime=").append(lasttime);
+        sb.append(", clLo=").append(clLo);
+        sb.append(", clLa=").append(clLa);
+        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

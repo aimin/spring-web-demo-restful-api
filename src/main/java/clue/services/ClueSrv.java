@@ -61,8 +61,19 @@ public class ClueSrv {
         ClClue clue = new ClClue();
         clue.setClId(cl_id);
         clue.setClStatus(-1);
+        clue.setLasttime(DateTime.now().getMillis());
         int n = clue_dao.updateByPrimaryKey(clue);
         return n;
+    }
+
+    /**
+     * 批量逻辑删除
+     * @param cl_ids
+     */
+    public void Del(long[] cl_ids){
+        for (long cl_id:cl_ids) {
+            this.Del(cl_id);
+        }
     }
 
     /**
@@ -133,14 +144,4 @@ public class ClueSrv {
         return this.GetList(page,number,cce);
     }
 
-
-
-
-
-
-
-
-    public  void test1(){
-        System.out.println(8888);
-    }
 }

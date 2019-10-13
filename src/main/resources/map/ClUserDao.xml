@@ -5,12 +5,16 @@
     <id column="uid" jdbcType="BIGINT" property="uid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="mobile" jdbcType="CHAR" property="mobile" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="third_openid" jdbcType="CHAR" property="thirdOpenid" />
     <result column="third_sessionkey" jdbcType="CHAR" property="thirdSessionkey" />
     <result column="third_ext_info" jdbcType="CHAR" property="thirdExtInfo" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="createtime" jdbcType="BIGINT" property="createtime" />
+    <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
+    <result column="cl_lo" jdbcType="DOUBLE" property="clLo" />
+    <result column="cl_la" jdbcType="DOUBLE" property="clLa" />
+    <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    `uid`, username, mobile, `password`, third_openid, third_sessionkey, third_ext_info, 
-    createtime, lasttime
+    `uid`, username, mobile, email, `password`, third_openid, third_sessionkey, third_ext_info, 
+    createtime, lasttime, cl_lo, cl_la, `status`
   </sql>
   <select id="selectByExample" parameterType="clue.model.ClUserExample" resultMap="BaseResultMap">
     select
@@ -113,12 +117,14 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="clue.model.ClUser" useGeneratedKeys="true">
-    insert into cl_user (username, mobile, `password`, 
-      third_openid, third_sessionkey, third_ext_info, 
-      createtime, lasttime)
-    values (#{username,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, 
-      #{thirdOpenid,jdbcType=CHAR}, #{thirdSessionkey,jdbcType=CHAR}, #{thirdExtInfo,jdbcType=CHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP})
+    insert into cl_user (username, mobile, email, 
+      `password`, third_openid, third_sessionkey, 
+      third_ext_info, createtime, lasttime, 
+      cl_lo, cl_la, `status`)
+    values (#{username,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{thirdOpenid,jdbcType=CHAR}, #{thirdSessionkey,jdbcType=CHAR}, 
+      #{thirdExtInfo,jdbcType=CHAR}, #{createtime,jdbcType=BIGINT}, #{lasttime,jdbcType=BIGINT}, 
+      #{clLo,jdbcType=DOUBLE}, #{clLa,jdbcType=DOUBLE}, #{status,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" keyColumn="uid" keyProperty="uid" parameterType="clue.model.ClUser" useGeneratedKeys="true">
     insert into cl_user
@@ -128,6 +134,9 @@
       </if>
       <if test="mobile != null">
         mobile,
+      </if>
+      <if test="email != null">
+        email,
       </if>
       <if test="password != null">
         `password`,
@@ -147,6 +156,15 @@
       <if test="lasttime != null">
         lasttime,
       </if>
+      <if test="clLo != null">
+        cl_lo,
+      </if>
+      <if test="clLa != null">
+        cl_la,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -154,6 +172,9 @@
       </if>
       <if test="mobile != null">
         #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -168,10 +189,19 @@
         #{thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        #{lasttime,jdbcType=TIMESTAMP},
+        #{lasttime,jdbcType=BIGINT},
+      </if>
+      <if test="clLo != null">
+        #{clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="clLa != null">
+        #{clLa,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -193,6 +223,9 @@
       <if test="record.mobile != null">
         mobile = #{record.mobile,jdbcType=CHAR},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.password != null">
         `password` = #{record.password,jdbcType=VARCHAR},
       </if>
@@ -206,10 +239,19 @@
         third_ext_info = #{record.thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+        createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
       <if test="record.lasttime != null">
-        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{record.lasttime,jdbcType=BIGINT},
+      </if>
+      <if test="record.clLo != null">
+        cl_lo = #{record.clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="record.clLa != null">
+        cl_la = #{record.clLa,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
       </if>
     </set>
     <if test="_parameter != null">
@@ -221,12 +263,16 @@
     set `uid` = #{record.uid,jdbcType=BIGINT},
       username = #{record.username,jdbcType=VARCHAR},
       mobile = #{record.mobile,jdbcType=CHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       `password` = #{record.password,jdbcType=VARCHAR},
       third_openid = #{record.thirdOpenid,jdbcType=CHAR},
       third_sessionkey = #{record.thirdSessionkey,jdbcType=CHAR},
       third_ext_info = #{record.thirdExtInfo,jdbcType=CHAR},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP}
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT},
+      cl_lo = #{record.clLo,jdbcType=DOUBLE},
+      cl_la = #{record.clLa,jdbcType=DOUBLE},
+      `status` = #{record.status,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -239,6 +285,9 @@
       </if>
       <if test="mobile != null">
         mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
@@ -253,10 +302,19 @@
         third_ext_info = #{thirdExtInfo,jdbcType=CHAR},
       </if>
       <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{lasttime,jdbcType=BIGINT},
+      </if>
+      <if test="clLo != null">
+        cl_lo = #{clLo,jdbcType=DOUBLE},
+      </if>
+      <if test="clLa != null">
+        cl_la = #{clLa,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
       </if>
     </set>
     where `uid` = #{uid,jdbcType=BIGINT}
@@ -265,12 +323,16 @@
     update cl_user
     set username = #{username,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
       `password` = #{password,jdbcType=VARCHAR},
       third_openid = #{thirdOpenid,jdbcType=CHAR},
       third_sessionkey = #{thirdSessionkey,jdbcType=CHAR},
       third_ext_info = #{thirdExtInfo,jdbcType=CHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP}
+      createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT},
+      cl_lo = #{clLo,jdbcType=DOUBLE},
+      cl_la = #{clLa,jdbcType=DOUBLE},
+      `status` = #{status,jdbcType=TINYINT}
     where `uid` = #{uid,jdbcType=BIGINT}
   </update>
 </mapper>
