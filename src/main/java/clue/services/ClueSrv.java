@@ -3,27 +3,14 @@ package clue.services;
 import clue.dao.ClClueDao;
 import clue.model.ClClue;
 import clue.model.ClClueExample;
+import clue.services.push.PreClCues;
+import clue.services.push.WxUserOrgPusher;
 import clue.util.C_Result;
 import clue.util.C_Tool;
-import org.apache.ibatis.session.SqlSession;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDateTime;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Transactional;
-import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
 
 
 @Service
@@ -31,6 +18,10 @@ public class ClueSrv {
 
     @Resource
     ClClueDao clue_dao;
+    @Resource
+    PreClCues preClCues;
+    @Resource
+    WxUserOrgPusher wxUserOrgPusher;
 
     /**
      * 批量添加线索
@@ -146,6 +137,14 @@ public class ClueSrv {
         ClClueExample.Criteria c = cce.createCriteria();
         c.andClStatusEqualTo(cl_status);
         return this.GetList(page,number,cce);
+    }
+
+
+    /**
+     * 执行推送线索到机构
+     */
+    public void DoPush(){
+        preClCues.DoPush(wxUserOrgPusher);
     }
 
 }

@@ -3,6 +3,10 @@ package clue.util;
 import clue.dao.C_IfDao;
 import clue.model.C_IfExample;
 import clue.model.ClClue;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
 import java.text.ParseException;
@@ -171,4 +175,10 @@ public class C_Tool {
 
 
 
+
+
+
+
 }
+
+
