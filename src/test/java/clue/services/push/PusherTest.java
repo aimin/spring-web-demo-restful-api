@@ -5,6 +5,7 @@ import clue.dao.ClUtilDao;
 import clue.model.ClClue;
 import clue.model.ClUtil;
 import clue.model.ClUtilExample;
+import clue.services.ClueSrv;
 import keywords.SamApplication;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -25,6 +26,9 @@ public class PusherTest {
     ClUtilDao clUtilDao;
     @Resource
     ClClueDao clClueDao;
+
+    @Resource
+    ClueSrv clueSrv;
 
 
     @Test
@@ -54,6 +58,25 @@ public class PusherTest {
 
         System.out.println(DateTime.now().plusDays(-3).getMillis());
         System.out.println(DateTime.now().getMillis());
+    }
+
+
+
+    @Test
+    public void push(){
+        //创新线索
+        ClClue c = new ClClue();
+        c.setClType(1);
+        c.setClStatus(1);
+        c.setClDesc("室内保洁");
+        c.setClLinkMob("13552528384");
+        c.setClLinkMan("张振军");
+
+        ClClue[] cs = clueSrv.Add(new ClClue[]{c});
+
+        assert (cs[0].getClId()>0);
+
+
     }
 
 }

@@ -7,13 +7,11 @@
     <result column="cl_status" jdbcType="INTEGER" property="clStatus" />
     <result column="createtime" jdbcType="BIGINT" property="createtime" />
     <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
+    <result column="cl_desc" jdbcType="VARCHAR" property="clDesc" />
     <result column="cl_link_mob" jdbcType="CHAR" property="clLinkMob" />
     <result column="cl_link_man" jdbcType="CHAR" property="clLinkMan" />
     <result column="cl_lo" jdbcType="DOUBLE" property="clLo" />
     <result column="cl_la" jdbcType="DOUBLE" property="clLa" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="clue.model.ClClue">
-    <result column="cl_desc" jdbcType="LONGVARCHAR" property="clDesc" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,36 +72,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    cl_id, cl_type, cl_status, createtime, lasttime, cl_link_mob, cl_link_man, cl_lo, 
-    cl_la
+    cl_id, cl_type, cl_status, createtime, lasttime, cl_desc, cl_link_mob, cl_link_man, 
+    cl_lo, cl_la
   </sql>
-  <sql id="Blob_Column_List">
-    cl_desc
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="clue.model.ClClueExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from cl_clue
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
   <select id="selectByExample" parameterType="clue.model.ClClueExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -126,11 +97,9 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from cl_clue
     where cl_id = #{clId,jdbcType=BIGINT}
   </select>
@@ -146,13 +115,11 @@
   </delete>
   <insert id="insert" keyColumn="cl_id" keyProperty="clId" parameterType="clue.model.ClClue" useGeneratedKeys="true">
     insert into cl_clue (cl_type, cl_status, createtime, 
-      lasttime, cl_link_mob, cl_link_man, 
-      cl_lo, cl_la, cl_desc
-      )
+      lasttime, cl_desc, cl_link_mob, 
+      cl_link_man, cl_lo, cl_la)
     values (#{clType,jdbcType=INTEGER}, #{clStatus,jdbcType=INTEGER}, #{createtime,jdbcType=BIGINT}, 
-      #{lasttime,jdbcType=BIGINT}, #{clLinkMob,jdbcType=CHAR}, #{clLinkMan,jdbcType=CHAR}, 
-      #{clLo,jdbcType=DOUBLE}, #{clLa,jdbcType=DOUBLE}, #{clDesc,jdbcType=LONGVARCHAR}
-      )
+      #{lasttime,jdbcType=BIGINT}, #{clDesc,jdbcType=VARCHAR}, #{clLinkMob,jdbcType=CHAR}, 
+      #{clLinkMan,jdbcType=CHAR}, #{clLo,jdbcType=DOUBLE}, #{clLa,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" keyColumn="cl_id" keyProperty="clId" parameterType="clue.model.ClClue" useGeneratedKeys="true">
     insert into cl_clue
@@ -169,6 +136,9 @@
       <if test="lasttime != null">
         lasttime,
       </if>
+      <if test="clDesc != null">
+        cl_desc,
+      </if>
       <if test="clLinkMob != null">
         cl_link_mob,
       </if>
@@ -180,9 +150,6 @@
       </if>
       <if test="clLa != null">
         cl_la,
-      </if>
-      <if test="clDesc != null">
-        cl_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -198,6 +165,9 @@
       <if test="lasttime != null">
         #{lasttime,jdbcType=BIGINT},
       </if>
+      <if test="clDesc != null">
+        #{clDesc,jdbcType=VARCHAR},
+      </if>
       <if test="clLinkMob != null">
         #{clLinkMob,jdbcType=CHAR},
       </if>
@@ -209,9 +179,6 @@
       </if>
       <if test="clLa != null">
         #{clLa,jdbcType=DOUBLE},
-      </if>
-      <if test="clDesc != null">
-        #{clDesc,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -239,6 +206,9 @@
       <if test="record.lasttime != null">
         lasttime = #{record.lasttime,jdbcType=BIGINT},
       </if>
+      <if test="record.clDesc != null">
+        cl_desc = #{record.clDesc,jdbcType=VARCHAR},
+      </if>
       <if test="record.clLinkMob != null">
         cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
       </if>
@@ -251,26 +221,7 @@
       <if test="record.clLa != null">
         cl_la = #{record.clLa,jdbcType=DOUBLE},
       </if>
-      <if test="record.clDesc != null">
-        cl_desc = #{record.clDesc,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update cl_clue
-    set cl_id = #{record.clId,jdbcType=BIGINT},
-      cl_type = #{record.clType,jdbcType=INTEGER},
-      cl_status = #{record.clStatus,jdbcType=INTEGER},
-      createtime = #{record.createtime,jdbcType=BIGINT},
-      lasttime = #{record.lasttime,jdbcType=BIGINT},
-      cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
-      cl_link_man = #{record.clLinkMan,jdbcType=CHAR},
-      cl_lo = #{record.clLo,jdbcType=DOUBLE},
-      cl_la = #{record.clLa,jdbcType=DOUBLE},
-      cl_desc = #{record.clDesc,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -282,6 +233,7 @@
       cl_status = #{record.clStatus,jdbcType=INTEGER},
       createtime = #{record.createtime,jdbcType=BIGINT},
       lasttime = #{record.lasttime,jdbcType=BIGINT},
+      cl_desc = #{record.clDesc,jdbcType=VARCHAR},
       cl_link_mob = #{record.clLinkMob,jdbcType=CHAR},
       cl_link_man = #{record.clLinkMan,jdbcType=CHAR},
       cl_lo = #{record.clLo,jdbcType=DOUBLE},
@@ -305,6 +257,9 @@
       <if test="lasttime != null">
         lasttime = #{lasttime,jdbcType=BIGINT},
       </if>
+      <if test="clDesc != null">
+        cl_desc = #{clDesc,jdbcType=VARCHAR},
+      </if>
       <if test="clLinkMob != null">
         cl_link_mob = #{clLinkMob,jdbcType=CHAR},
       </if>
@@ -317,23 +272,7 @@
       <if test="clLa != null">
         cl_la = #{clLa,jdbcType=DOUBLE},
       </if>
-      <if test="clDesc != null">
-        cl_desc = #{clDesc,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where cl_id = #{clId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="clue.model.ClClue">
-    update cl_clue
-    set cl_type = #{clType,jdbcType=INTEGER},
-      cl_status = #{clStatus,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=BIGINT},
-      lasttime = #{lasttime,jdbcType=BIGINT},
-      cl_link_mob = #{clLinkMob,jdbcType=CHAR},
-      cl_link_man = #{clLinkMan,jdbcType=CHAR},
-      cl_lo = #{clLo,jdbcType=DOUBLE},
-      cl_la = #{clLa,jdbcType=DOUBLE},
-      cl_desc = #{clDesc,jdbcType=LONGVARCHAR}
     where cl_id = #{clId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="clue.model.ClClue">
@@ -342,6 +281,7 @@
       cl_status = #{clStatus,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=BIGINT},
       lasttime = #{lasttime,jdbcType=BIGINT},
+      cl_desc = #{clDesc,jdbcType=VARCHAR},
       cl_link_mob = #{clLinkMob,jdbcType=CHAR},
       cl_link_man = #{clLinkMan,jdbcType=CHAR},
       cl_lo = #{clLo,jdbcType=DOUBLE},

@@ -3,7 +3,7 @@ package clue.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClClueExample implements C_IfExample{
+public class ClClueExample implements C_IfExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -421,6 +421,76 @@ public class ClClueExample implements C_IfExample{
 
         public Criteria andLasttimeNotBetween(Long value1, Long value2) {
             addCriterion("lasttime not between", value1, value2, "lasttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescIsNull() {
+            addCriterion("cl_desc is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescIsNotNull() {
+            addCriterion("cl_desc is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescEqualTo(String value) {
+            addCriterion("cl_desc =", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescNotEqualTo(String value) {
+            addCriterion("cl_desc <>", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescGreaterThan(String value) {
+            addCriterion("cl_desc >", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescGreaterThanOrEqualTo(String value) {
+            addCriterion("cl_desc >=", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescLessThan(String value) {
+            addCriterion("cl_desc <", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescLessThanOrEqualTo(String value) {
+            addCriterion("cl_desc <=", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescLike(String value) {
+            addCriterion("cl_desc like", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescNotLike(String value) {
+            addCriterion("cl_desc not like", value, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescIn(List<String> values) {
+            addCriterion("cl_desc in", values, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescNotIn(List<String> values) {
+            addCriterion("cl_desc not in", values, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescBetween(String value1, String value2) {
+            addCriterion("cl_desc between", value1, value2, "clDesc");
+            return (Criteria) this;
+        }
+
+        public Criteria andClDescNotBetween(String value1, String value2) {
+            addCriterion("cl_desc not between", value1, value2, "clDesc");
             return (Criteria) this;
         }
 

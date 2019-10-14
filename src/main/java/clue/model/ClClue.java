@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 /**
  * cl_clue
- * @author
+ * @author 
  */
 public class ClClue implements Serializable {
     /**
-     * 线索id
+     * 线索id 
      */
     private Long clId;
 
@@ -18,13 +18,18 @@ public class ClClue implements Serializable {
     private Integer clType;
 
     /**
-     * 线索状态：-1.删除 1.新建 2.成功推送 3.采纳 4.实现增值 5.无平台采纳
+     * 线索状态：-1.删除 1.新建 2.成功推送 3.采纳 4.实现增值 5.无平台采纳 
      */
     private Integer clStatus;
 
     private Long createtime;
 
     private Long lasttime;
+
+    /**
+     * 线索描述
+     */
+    private String clDesc;
 
     /**
      * 线索联系电话
@@ -45,11 +50,6 @@ public class ClClue implements Serializable {
      * 坐标纬度值
      */
     private Double clLa;
-
-    /**
-     * 线索描述
-     */
-    private String clDesc;
 
     private static final long serialVersionUID = 1L;
 
@@ -93,6 +93,14 @@ public class ClClue implements Serializable {
         this.lasttime = lasttime;
     }
 
+    public String getClDesc() {
+        return clDesc;
+    }
+
+    public void setClDesc(String clDesc) {
+        this.clDesc = clDesc;
+    }
+
     public String getClLinkMob() {
         return clLinkMob;
     }
@@ -125,14 +133,6 @@ public class ClClue implements Serializable {
         this.clLa = clLa;
     }
 
-    public String getClDesc() {
-        return clDesc;
-    }
-
-    public void setClDesc(String clDesc) {
-        this.clDesc = clDesc;
-    }
-
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -150,11 +150,11 @@ public class ClClue implements Serializable {
             && (this.getClStatus() == null ? other.getClStatus() == null : this.getClStatus().equals(other.getClStatus()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getLasttime() == null ? other.getLasttime() == null : this.getLasttime().equals(other.getLasttime()))
+            && (this.getClDesc() == null ? other.getClDesc() == null : this.getClDesc().equals(other.getClDesc()))
             && (this.getClLinkMob() == null ? other.getClLinkMob() == null : this.getClLinkMob().equals(other.getClLinkMob()))
             && (this.getClLinkMan() == null ? other.getClLinkMan() == null : this.getClLinkMan().equals(other.getClLinkMan()))
             && (this.getClLo() == null ? other.getClLo() == null : this.getClLo().equals(other.getClLo()))
-            && (this.getClLa() == null ? other.getClLa() == null : this.getClLa().equals(other.getClLa()))
-            && (this.getClDesc() == null ? other.getClDesc() == null : this.getClDesc().equals(other.getClDesc()));
+            && (this.getClLa() == null ? other.getClLa() == null : this.getClLa().equals(other.getClLa()));
     }
 
     @Override
@@ -166,11 +166,11 @@ public class ClClue implements Serializable {
         result = prime * result + ((getClStatus() == null) ? 0 : getClStatus().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getLasttime() == null) ? 0 : getLasttime().hashCode());
+        result = prime * result + ((getClDesc() == null) ? 0 : getClDesc().hashCode());
         result = prime * result + ((getClLinkMob() == null) ? 0 : getClLinkMob().hashCode());
         result = prime * result + ((getClLinkMan() == null) ? 0 : getClLinkMan().hashCode());
         result = prime * result + ((getClLo() == null) ? 0 : getClLo().hashCode());
         result = prime * result + ((getClLa() == null) ? 0 : getClLa().hashCode());
-        result = prime * result + ((getClDesc() == null) ? 0 : getClDesc().hashCode());
         return result;
     }
 
@@ -185,15 +185,13 @@ public class ClClue implements Serializable {
         sb.append(", clStatus=").append(clStatus);
         sb.append(", createtime=").append(createtime);
         sb.append(", lasttime=").append(lasttime);
+        sb.append(", clDesc=").append(clDesc);
         sb.append(", clLinkMob=").append(clLinkMob);
         sb.append(", clLinkMan=").append(clLinkMan);
         sb.append(", clLo=").append(clLo);
         sb.append(", clLa=").append(clLa);
-        sb.append(", clDesc=").append(clDesc);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
-
-
 }
