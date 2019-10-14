@@ -1,7 +1,6 @@
 package clue.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * cl_push_log
@@ -10,17 +9,19 @@ import java.util.Date;
 public class ClPushLog implements Serializable {
     private Long pid;
 
-    private Date createtime;
+    private Long createtime;
 
-    private Date lasttime;
+    private Long lasttime;
 
     /**
-     * 1.已接收
+     * -1.无效
+0.已推送
+1.已接收
 2.已入市
 3.成交
 4.返现
      */
-    private Integer status;
+    private Byte status;
 
     /**
      * 信息id
@@ -30,7 +31,7 @@ public class ClPushLog implements Serializable {
     /**
      * 机构id
      */
-    private Long oid;
+    private Integer oid;
 
     private static final long serialVersionUID = 1L;
 
@@ -42,27 +43,27 @@ public class ClPushLog implements Serializable {
         this.pid = pid;
     }
 
-    public Date getCreatetime() {
+    public Long getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Long createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLasttime() {
+    public Long getLasttime() {
         return lasttime;
     }
 
-    public void setLasttime(Date lasttime) {
+    public void setLasttime(Long lasttime) {
         this.lasttime = lasttime;
     }
 
-    public Integer getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 
@@ -74,11 +75,11 @@ public class ClPushLog implements Serializable {
         this.clId = clId;
     }
 
-    public Long getOid() {
+    public Integer getOid() {
         return oid;
     }
 
-    public void setOid(Long oid) {
+    public void setOid(Integer oid) {
         this.oid = oid;
     }
 

@@ -19,6 +19,11 @@ public class ClUtil implements Serializable {
      */
     private String value;
 
+    /**
+     * 说明
+     */
+    private String remart;
+
     private Long createtime;
 
     private Long lasttime;
@@ -47,6 +52,14 @@ public class ClUtil implements Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getRemart() {
+        return remart;
+    }
+
+    public void setRemart(String remart) {
+        this.remart = remart;
     }
 
     public Long getCreatetime() {
@@ -80,6 +93,7 @@ public class ClUtil implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getIdstr() == null ? other.getIdstr() == null : this.getIdstr().equals(other.getIdstr()))
             && (this.getValue() == null ? other.getValue() == null : this.getValue().equals(other.getValue()))
+            && (this.getRemart() == null ? other.getRemart() == null : this.getRemart().equals(other.getRemart()))
             && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getLasttime() == null ? other.getLasttime() == null : this.getLasttime().equals(other.getLasttime()));
     }
@@ -91,6 +105,7 @@ public class ClUtil implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getIdstr() == null) ? 0 : getIdstr().hashCode());
         result = prime * result + ((getValue() == null) ? 0 : getValue().hashCode());
+        result = prime * result + ((getRemart() == null) ? 0 : getRemart().hashCode());
         result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getLasttime() == null) ? 0 : getLasttime().hashCode());
         return result;
@@ -105,6 +120,7 @@ public class ClUtil implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", idstr=").append(idstr);
         sb.append(", value=").append(value);
+        sb.append(", remart=").append(remart);
         sb.append(", createtime=").append(createtime);
         sb.append(", lasttime=").append(lasttime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -5,6 +5,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="idstr" jdbcType="CHAR" property="idstr" />
     <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="remart" jdbcType="VARCHAR" property="remart" />
     <result column="createtime" jdbcType="BIGINT" property="createtime" />
     <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, idstr, `value`, createtime, lasttime
+    id, idstr, `value`, remart, createtime, lasttime
   </sql>
   <select id="selectByExample" parameterType="clue.model.ClUtilExample" resultMap="BaseResultMap">
     select
@@ -108,10 +109,10 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="clue.model.ClUtil" useGeneratedKeys="true">
-    insert into cl_util (idstr, `value`, createtime, 
-      lasttime)
-    values (#{idstr,jdbcType=CHAR}, #{value,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}, 
-      #{lasttime,jdbcType=BIGINT})
+    insert into cl_util (idstr, `value`, remart, 
+      createtime, lasttime)
+    values (#{idstr,jdbcType=CHAR}, #{value,jdbcType=VARCHAR}, #{remart,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT}, #{lasttime,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="clue.model.ClUtil" useGeneratedKeys="true">
     insert into cl_util
@@ -121,6 +122,9 @@
       </if>
       <if test="value != null">
         `value`,
+      </if>
+      <if test="remart != null">
+        remart,
       </if>
       <if test="createtime != null">
         createtime,
@@ -135,6 +139,9 @@
       </if>
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
+      </if>
+      <if test="remart != null">
+        #{remart,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=BIGINT},
@@ -162,6 +169,9 @@
       <if test="record.value != null">
         `value` = #{record.value,jdbcType=VARCHAR},
       </if>
+      <if test="record.remart != null">
+        remart = #{record.remart,jdbcType=VARCHAR},
+      </if>
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
@@ -178,6 +188,7 @@
     set id = #{record.id,jdbcType=BIGINT},
       idstr = #{record.idstr,jdbcType=CHAR},
       `value` = #{record.value,jdbcType=VARCHAR},
+      remart = #{record.remart,jdbcType=VARCHAR},
       createtime = #{record.createtime,jdbcType=BIGINT},
       lasttime = #{record.lasttime,jdbcType=BIGINT}
     <if test="_parameter != null">
@@ -193,6 +204,9 @@
       <if test="value != null">
         `value` = #{value,jdbcType=VARCHAR},
       </if>
+      <if test="remart != null">
+        remart = #{remart,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=BIGINT},
       </if>
@@ -206,6 +220,7 @@
     update cl_util
     set idstr = #{idstr,jdbcType=CHAR},
       `value` = #{value,jdbcType=VARCHAR},
+      remart = #{remart,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=BIGINT},
       lasttime = #{lasttime,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}

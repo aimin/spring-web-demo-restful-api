@@ -3,11 +3,11 @@
 <mapper namespace="clue.dao.ClPushLogDao">
   <resultMap id="BaseResultMap" type="clue.model.ClPushLog">
     <id column="pid" jdbcType="BIGINT" property="pid" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    <result column="lasttime" jdbcType="TIMESTAMP" property="lasttime" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createtime" jdbcType="BIGINT" property="createtime" />
+    <result column="lasttime" jdbcType="BIGINT" property="lasttime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="cl_id" jdbcType="BIGINT" property="clId" />
-    <result column="oid" jdbcType="BIGINT" property="oid" />
+    <result column="oid" jdbcType="INTEGER" property="oid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -111,8 +111,8 @@
   <insert id="insert" keyColumn="pid" keyProperty="pid" parameterType="clue.model.ClPushLog" useGeneratedKeys="true">
     insert into cl_push_log (createtime, lasttime, `status`, 
       cl_id, oid)
-    values (#{createtime,jdbcType=TIMESTAMP}, #{lasttime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{clId,jdbcType=BIGINT}, #{oid,jdbcType=BIGINT})
+    values (#{createtime,jdbcType=BIGINT}, #{lasttime,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{clId,jdbcType=BIGINT}, #{oid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" keyColumn="pid" keyProperty="pid" parameterType="clue.model.ClPushLog" useGeneratedKeys="true">
     insert into cl_push_log
@@ -135,19 +135,19 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+        #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        #{lasttime,jdbcType=TIMESTAMP},
+        #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        #{status,jdbcType=INTEGER},
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="clId != null">
         #{clId,jdbcType=BIGINT},
       </if>
       <if test="oid != null">
-        #{oid,jdbcType=BIGINT},
+        #{oid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -164,19 +164,19 @@
         pid = #{record.pid,jdbcType=BIGINT},
       </if>
       <if test="record.createtime != null">
-        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+        createtime = #{record.createtime,jdbcType=BIGINT},
       </if>
       <if test="record.lasttime != null">
-        lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{record.lasttime,jdbcType=BIGINT},
       </if>
       <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
+        `status` = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.clId != null">
         cl_id = #{record.clId,jdbcType=BIGINT},
       </if>
       <if test="record.oid != null">
-        oid = #{record.oid,jdbcType=BIGINT},
+        oid = #{record.oid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -186,11 +186,11 @@
   <update id="updateByExample" parameterType="map">
     update cl_push_log
     set pid = #{record.pid,jdbcType=BIGINT},
-      createtime = #{record.createtime,jdbcType=TIMESTAMP},
-      lasttime = #{record.lasttime,jdbcType=TIMESTAMP},
-      `status` = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=BIGINT},
+      lasttime = #{record.lasttime,jdbcType=BIGINT},
+      `status` = #{record.status,jdbcType=TINYINT},
       cl_id = #{record.clId,jdbcType=BIGINT},
-      oid = #{record.oid,jdbcType=BIGINT}
+      oid = #{record.oid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -199,30 +199,30 @@
     update cl_push_log
     <set>
       <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+        createtime = #{createtime,jdbcType=BIGINT},
       </if>
       <if test="lasttime != null">
-        lasttime = #{lasttime,jdbcType=TIMESTAMP},
+        lasttime = #{lasttime,jdbcType=BIGINT},
       </if>
       <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
+        `status` = #{status,jdbcType=TINYINT},
       </if>
       <if test="clId != null">
         cl_id = #{clId,jdbcType=BIGINT},
       </if>
       <if test="oid != null">
-        oid = #{oid,jdbcType=BIGINT},
+        oid = #{oid,jdbcType=INTEGER},
       </if>
     </set>
     where pid = #{pid,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="clue.model.ClPushLog">
     update cl_push_log
-    set createtime = #{createtime,jdbcType=TIMESTAMP},
-      lasttime = #{lasttime,jdbcType=TIMESTAMP},
-      `status` = #{status,jdbcType=INTEGER},
+    set createtime = #{createtime,jdbcType=BIGINT},
+      lasttime = #{lasttime,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=TINYINT},
       cl_id = #{clId,jdbcType=BIGINT},
-      oid = #{oid,jdbcType=BIGINT}
+      oid = #{oid,jdbcType=INTEGER}
     where pid = #{pid,jdbcType=BIGINT}
   </update>
 </mapper>

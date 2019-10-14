@@ -1,8 +1,8 @@
 package clue.dao;
 
-import java.util.List;
 import clue.model.ClPushLog;
 import clue.model.ClPushLogExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ClPushLogDao {

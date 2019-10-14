@@ -324,6 +324,76 @@ public class ClUtilExample {
             return (Criteria) this;
         }
 
+        public Criteria andRemartIsNull() {
+            addCriterion("remart is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartIsNotNull() {
+            addCriterion("remart is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartEqualTo(String value) {
+            addCriterion("remart =", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartNotEqualTo(String value) {
+            addCriterion("remart <>", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartGreaterThan(String value) {
+            addCriterion("remart >", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartGreaterThanOrEqualTo(String value) {
+            addCriterion("remart >=", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartLessThan(String value) {
+            addCriterion("remart <", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartLessThanOrEqualTo(String value) {
+            addCriterion("remart <=", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartLike(String value) {
+            addCriterion("remart like", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartNotLike(String value) {
+            addCriterion("remart not like", value, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartIn(List<String> values) {
+            addCriterion("remart in", values, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartNotIn(List<String> values) {
+            addCriterion("remart not in", values, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartBetween(String value1, String value2) {
+            addCriterion("remart between", value1, value2, "remart");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemartNotBetween(String value1, String value2) {
+            addCriterion("remart not between", value1, value2, "remart");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatetimeIsNull() {
             addCriterion("createtime is null");
             return (Criteria) this;
