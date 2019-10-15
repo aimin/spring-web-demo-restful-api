@@ -3,15 +3,13 @@ package clue.services;
 import clue.model.ClUser;
 import clue.util.C_Result;
 import clue.util.C_Tool;
-import keywords.SamApplication;
+import clue.SamApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 
 @RunWith(SpringRunner.class)

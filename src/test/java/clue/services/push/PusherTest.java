@@ -4,12 +4,9 @@ import clue.dao.ClClueDao;
 import clue.dao.ClUtilDao;
 import clue.model.ClClue;
 import clue.model.ClTradeOrg;
-import clue.model.ClUtil;
-import clue.model.ClUtilExample;
 import clue.services.ClueSrv;
 import clue.services.OrgSrv;
-import keywords.SamApplication;
-import org.joda.time.DateTime;
+import clue.SamApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-import java.util.List;
-
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SamApplication.class)
 public class PusherTest {
