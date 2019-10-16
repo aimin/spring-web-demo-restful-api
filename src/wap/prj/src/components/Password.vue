@@ -1,6 +1,6 @@
 <template>
 
-      <mt-field label="密码a" placeholder="密码" type="text" v-model="passwd" v-on:change="passwordVerification" v-bind:state="passwordVerification()" name="pwd" ></mt-field>
+      <mt-field label="密码" placeholder="密码" type="text" v-model="passwd" v-on:change="passwordVerification" v-bind:state="passwordVerification()" name="pwd" ></mt-field>
 </template>
 <script>
 export default {
