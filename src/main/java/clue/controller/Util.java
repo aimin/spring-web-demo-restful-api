@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /*
 * http://localhost:8989/swagger-ui.html 查看接口文档
 * */
-@Api(description = "小蓝鹊线索系统")
+@Api(description = "系统杂项接口")
 @RestController
 public class Util {
 

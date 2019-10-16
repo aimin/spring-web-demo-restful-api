@@ -3,8 +3,10 @@ package clue.services;
 import clue.dao.ClOrgUserDao;
 import clue.dao.ClUserDao;
 import clue.model.*;
+import clue.services.floor.JwtHelper;
 import clue.util.C_Result;
 import clue.util.C_Tool;
+import io.jsonwebtoken.Claims;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -60,13 +63,41 @@ public class UserSrv {
         ClUserExample cue = this.getExampleCriteria(usernameMobEmail);
 
         List<ClUser> list = clUserDao.selectByExample(cue);
+        if(list.size()<1){
+            return null;
+        }
+
         ClUser user = list.get(0);
         if(user.getPassword().equals(C_Tool.Md5(pwd))){
             //检查密码
             return user;
         }
-
         return null;
+    }
+
+    /**
+     * 登录成功生成token
+     * @param user
+     * @return
+     */
+    public String UserToToken(ClUser user){
+        Long  uid = user.getUid();
+        String username = user.getUsername();
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("uid",uid);
+        map.put("username",username);
+        String Token = JwtHelper.generateToken(map);
+        return Token;
+    }
+
+    /**
+     * 检查并解析token
+     * @param token
+     * @return
+     */
+    public Claims GetTokenInfo(String token){
+        Claims c = JwtHelper.verifyJwt(token);
+        return c ;
     }
 
     /**

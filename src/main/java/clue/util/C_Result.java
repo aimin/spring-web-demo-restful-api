@@ -11,4 +11,5 @@ public class C_Result<T> {
 
     public long pageCount; //结果总页数
 
+
 }

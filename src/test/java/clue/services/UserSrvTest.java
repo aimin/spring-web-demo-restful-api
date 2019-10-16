@@ -4,6 +4,7 @@ import clue.model.ClUser;
 import clue.util.C_Result;
 import clue.util.C_Tool;
 import clue.SamApplication;
+import io.swagger.models.auth.In;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -56,13 +57,17 @@ public class UserSrvTest {
     @Test
     public void TestUserLogin(){
         ClUser user = userSrv.PasswordLogin("sam","cccccc");
-        assert user.getUid()>0;
+        String token = userSrv.UserToToken(user);
+        long uid = new Integer((int)userSrv.GetTokenInfo(token).get("uid")).longValue();
+        assert uid>0;
 
-        user = userSrv.PasswordLogin("13552528384","cccccc");
-        assert user.getUid()>0;
+         user = userSrv.PasswordLogin("13552528384","cccccc");
+         token = userSrv.UserToToken(user);
+        assert new Integer((int)userSrv.GetTokenInfo(token).get("uid")).longValue()>0;
 
-        user = userSrv.PasswordLogin("samxx8@163.com","cccccc");
-        assert user.getUid()>0;
+         user = userSrv.PasswordLogin("samxx8@163.com","cccccc");
+         token = userSrv.UserToToken(user);
+        assert new Integer((int)userSrv.GetTokenInfo(token).get("uid")).longValue()>0;
 
 
         user = userSrv.PasswordLogin("sam","ccccccx");
@@ -71,10 +76,10 @@ public class UserSrvTest {
 
     @Test
     public void TestUserUpdate(){
-        ClUser user = userSrv.PasswordLogin("sam","cccccc");
-        user.setMobile("13888665555");
-        int n = userSrv.Update(user);
-        assert n>0;
+//        ClUser user = userSrv.PasswordLogin("sam","cccccc");
+//        user.setMobile("13888665555");
+//        int n = userSrv.Update(user);
+//        assert n>0;
 
         userSrv.Enable(1);
         C_Result<ClUser> re = userSrv.GetList(1);

@@ -114,7 +114,12 @@ public class VerifyUtil {
      * @return
      */
     public boolean chkRandcode(HttpServletRequest request,String code,String keyName){
-        return  ((String) request.getSession().getAttribute(keyName)).equals(code);
+        String sessionCode = (String) request.getSession().getAttribute(keyName);
+        if(sessionCode==null){
+            return false;
+        }
+        code = code.toUpperCase();
+        return  (sessionCode).equals(code);
     }
     public boolean chkRandcode(HttpServletRequest request,String code){
         return this.chkRandcode(request,code,RANDOMCODEKEY);
