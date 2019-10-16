@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     usernameVerification () {
-      var reg =  /^[a-zA-Z0-9]+$/;
+      var reg =  /^[a-zA-Z0-9|@|\.]+$/;
       if (this.username === '') {
         return ''
       } else if (!reg.test(this.username)) {
