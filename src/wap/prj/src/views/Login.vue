@@ -1,38 +1,30 @@
 <template>
   <div class="Login" >
-
+    <form>
     <div class="page-part">
-      <mt-field label="用户名" placeholder="用户名/邮箱/手机号" type="uname"></mt-field>
-      <mt-field label="密码" placeholder="密码" type="password"></mt-field>
+      <mt-field label="用户名" placeholder="用户名/邮箱/手机号" type="text" name="uname"></mt-field>
+      <com-password></com-password>
     </div>
-
-    <div class="page-part">
-      <mt-field label="验证码" placeholder="输入验证码">
-        <!--<img v-bind:src="this.$baseUrl+'/createImg'" height="35px" width="100px">-->
-        <img v-bind:src="url" v-on:click="say" height="35px" width="100px">
-      </mt-field>
-    </div>
+    <com-VerifyCode></com-VerifyCode>
 
     <div class="page-button-group">
       <mt-button size="large" type="primary">登录</mt-button>
     </div>
-
+    </form>
   </div>
 </template>
 
 <script>
+import VerifyCode from '@/components/VerifyCode'
+import Password from '@/components/Password'
+
 export default {
   name: 'Login',
-  data () {
-    return {
-      url: (this.$baseUrl + '/createImg'),
-      say:function (e) {
-        // var n = Math.random()
-        console.log(e.target.src)
-        console.log(this)
-      }
-    }
+  components: {
+    comVerifyCode: VerifyCode,
+    comPassword: Password
   }
+
 }
 </script>
 
