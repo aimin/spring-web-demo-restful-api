@@ -55,7 +55,7 @@ public class VerifyUtil {
     /**
      * 生成随机图片
      */
-    public void getRandcode(HttpServletRequest request, HttpServletResponse response) {
+    public void getRandcode(HttpServletRequest request, HttpServletResponse response,String keyName) {
         HttpSession session = request.getSession();
         // BufferedImage类是具有缓冲区的Image类,Image类是用于描述图像信息的类
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
@@ -73,8 +73,8 @@ public class VerifyUtil {
             randomString = drowString(g, randomString, i);
         }
         //将生成的随机字符串保存到session中
-        session.removeAttribute(RANDOMCODEKEY);
-        session.setAttribute(RANDOMCODEKEY, randomString);
+        session.removeAttribute(keyName);
+        session.setAttribute(keyName, randomString);
         //设置失效时间1分钟
         session.setMaxInactiveInterval(60);
         g.dispose();
@@ -89,9 +89,8 @@ public class VerifyUtil {
 
 
     public void genCode(HttpServletRequest request, HttpServletResponse response){
-        this.genCode(request,response,"RANDOMVALIDATECODEKEY");
+        this.genCode(request,response,RANDOMCODEKEY);
     }
-
 
     /**
      * web输出验证码图片
@@ -103,9 +102,9 @@ public class VerifyUtil {
             response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
             response.setHeader("Cache-Control", "no-cache");
             response.setDateHeader("Expire", 0);
-            this.getRandcode(request, response);//输出验证码图片
+            this.getRandcode(request, response,keyName);//输出验证码图片
             //将生成的随机验证码存放到redis中
-            redisService.set(keyName, (String) request.getSession().getAttribute("RANDOMREDISKEY"), Long.parseLong("60000"));
+//            redisService.set(keyName, (String) request.getSession().getAttribute("RANDOMREDISKEY"), Long.parseLong("60000"));
     }
 
     /**
@@ -115,11 +114,10 @@ public class VerifyUtil {
      * @return
      */
     public boolean chkRandcode(HttpServletRequest request,String code,String keyName){
-        return redisService.get(keyName).equals(code);
-
+        return  ((String) request.getSession().getAttribute(keyName)).equals(code);
     }
     public boolean chkRandcode(HttpServletRequest request,String code){
-        return this.chkRandcode(request,code,"RANDOMREDISKEY");
+        return this.chkRandcode(request,code,RANDOMCODEKEY);
     }
 
 

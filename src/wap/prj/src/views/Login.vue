@@ -9,7 +9,7 @@
     <div class="page-part">
       <mt-field label="验证码" placeholder="输入验证码">
         <!--<img v-bind:src="this.$baseUrl+'/createImg'" height="35px" width="100px">-->
-        <img v-bind:src="url" height="35px" width="100px">
+        <img v-bind:src="url" v-on:click="say" height="35px" width="100px">
       </mt-field>
     </div>
 
@@ -25,7 +25,12 @@ export default {
   name: 'Login',
   data () {
     return {
-      url: (this.$baseUrl + '/createImg')
+      url: (this.$baseUrl + '/createImg'),
+      say:function (e) {
+        // var n = Math.random()
+        console.log(e.target.src)
+        console.log(this)
+      }
     }
   }
 }
