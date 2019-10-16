@@ -2,7 +2,7 @@
   <div class="Login" >
     <form>
     <div class="page-part">
-      <mt-field label="用户名" placeholder="用户名/邮箱/手机号" type="text" name="uname"></mt-field>
+      <com-user-name></com-user-name>
       <com-password></com-password>
     </div>
     <com-VerifyCode></com-VerifyCode>
@@ -17,12 +17,14 @@
 <script>
 import VerifyCode from '@/components/VerifyCode'
 import Password from '@/components/Password'
+import UserName from '@/components/UserName'
 
 export default {
   name: 'Login',
   components: {
     comVerifyCode: VerifyCode,
-    comPassword: Password
+    comPassword: Password,
+    comUserName: UserName
   }
 
 }
