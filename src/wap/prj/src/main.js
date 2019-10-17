@@ -5,9 +5,12 @@ import App from './App'
 import router from './router'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import Util from './common/util.js'
 // 引入axios，并加到原型链中
 import axios from 'axios'
 import QS from 'qs'
+
+Vue.prototype.util = Util
 Vue.prototype.$http = axios
 Vue.prototype.qs = QS
 Vue.prototype.$http.defaults.withCredentials = true

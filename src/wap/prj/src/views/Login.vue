@@ -28,12 +28,26 @@ export default {
   },
   methods: {
     submit (e) {
-      console.log()
+      var _this = this
       var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
-      console.log(postData)
+      if (postData.uname === '') {
+        alert('用户名不可以空')
+        return
+      }
+      if (postData.pwd === '') {
+        alert('密码不可以空')
+        return
+      }
+      if (postData.code === '') {
+        alert('请输入验证码')
+        return
+      }
       postData = this.qs.stringify(postData)
       this.$http.post(this.$baseUrl + '/login', postData).then(function (res) {
-        console.log(res.body)
+        var code = _this.util.chkRes(res)
+        if (code === 0) {
+          _this.util.loginSuccess(res)
+        }
       }, function (res) {
         console.log(res.status)
       })
