@@ -40,7 +40,7 @@ public class User {
         ,@ApiImplicitParam( name = "verifyCode", value = "验证码", paramType = "query", required = true, dataType = "String")
     })
     @PostMapping(value = "/login")
-    public C_JSON_Result Login(HttpServletRequest request, HttpServletResponse response, @RequestParam("uname") String username, @RequestParam("pwd") String pwd, @RequestParam("verifyCode") String code) {
+    public C_JSON_Result Login(HttpServletRequest request, @RequestParam("uname") String username, @RequestParam("pwd") String pwd, @RequestParam("verifyCode") String code) {
         C_JSON_Result r = new C_JSON_Result();
         //检查验证码
         if(!verifyUtil.chkRandcode(request,code)){

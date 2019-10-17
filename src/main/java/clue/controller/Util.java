@@ -32,7 +32,8 @@ public class Util {
      */
     @GetMapping("/createImg")
     @ApiOperation(value = "图像验证码生成")
-    public void createImg(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void createImg(HttpServletRequest request, HttpServletResponse response){
+
         verifyUtil.genCode(request,response);
 
     }

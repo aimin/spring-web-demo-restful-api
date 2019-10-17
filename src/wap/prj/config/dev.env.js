@@ -13,7 +13,7 @@ switch (params) {
     baseUrl = '"http://b.com"'
     break
   default:
-    baseUrl = '"http://localhost:8989/"'
+    baseUrl = '"http://localhost:8989"'
 }
 
 module.exports = merge(prodEnv, {

@@ -34,6 +34,7 @@ public class JwtFilter implements Filter {
             Writer w = response.getWriter();
             w.write(json);
         }else {
+
             //token 有效
             filterChain.doFilter(request,response);
         }

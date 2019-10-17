@@ -2,13 +2,13 @@
   <div class="Login" >
     <form>
     <div class="page-part">
-      <com-user-name></com-user-name>
-      <com-password></com-password>
+      <com-user-name ref="comUserName"></com-user-name>
+      <com-password ref="comPassword"></com-password>
     </div>
-    <com-VerifyCode></com-VerifyCode>
+    <com-VerifyCode ref="comVerifyCode"></com-VerifyCode>
 
     <div class="page-button-group">
-      <mt-button size="large" type="primary">登录</mt-button>
+      <mt-button size="large" type="primary" @click="submit">登录</mt-button>
     </div>
     </form>
   </div>
@@ -25,6 +25,19 @@ export default {
     comVerifyCode: VerifyCode,
     comPassword: Password,
     comUserName: UserName
+  },
+  methods: {
+    submit (e) {
+      console.log()
+      var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
+      console.log(postData)
+      postData = this.qs.stringify(postData)
+      this.$http.post(this.$baseUrl + '/login' , postData).then(function (res) {
+        console.log(res.body)
+      }, function (res) {
+        console.log(res.status)
+      })
+    }
   }
 
 }
