@@ -18,5 +18,12 @@ export default {
     console.log(res.data.data)
     localStorage.setItem('userinfo', JSON.stringify(res.data.data))
     console.log(JSON.parse(localStorage.getItem('userinfo')))
+  },
+  // 检查未登录
+  chkLogin (_vue) {
+    var userinfo = JSON.parse(localStorage.getItem('userinfo'))
+    if (userinfo === null) {
+      _vue.$router.push('/Login')
+    }
   }
 }

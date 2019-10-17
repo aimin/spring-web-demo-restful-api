@@ -13,6 +13,7 @@ import QS from 'qs'
 Vue.prototype.util = Util
 Vue.prototype.$http = axios
 Vue.prototype.qs = QS
+
 Vue.prototype.$http.defaults.withCredentials = true
 Vue.use(Mint)
 
@@ -24,5 +25,9 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  mounted: function () {
+    // 检查未登录
+    this.util.chkLogin(this)
+  }
 })
