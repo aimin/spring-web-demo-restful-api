@@ -32,7 +32,7 @@ export default {
       var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
       console.log(postData)
       postData = this.qs.stringify(postData)
-      this.$http.post(this.$baseUrl + '/login' , postData).then(function (res) {
+      this.$http.post(this.$baseUrl + '/login', postData).then(function (res) {
         console.log(res.body)
       }, function (res) {
         console.log(res.status)
