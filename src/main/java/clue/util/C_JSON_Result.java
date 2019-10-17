@@ -35,6 +35,7 @@ public class C_JSON_Result {
         map.put(0,"成功！"); //默认消息不输出
         map.put(10001,"登录验证码错误！");
         map.put(10002,"登录信息有误，登录失败！");
+        map.put(10003,"token无效");
 
 
         return map;

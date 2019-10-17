@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -72,6 +73,23 @@ public class User {
         String token = userSrv.UserToToken(user);
         map.put("token",token);
         return map;
+    }
+
+
+    @ApiOperation(value = "用户信息")
+    @ApiImplicitParams(value = {
+            @ApiImplicitParam( name = "id", value = "用户id", paramType = "path", required = true, dataType = "Long"),
+            @ApiImplicitParam( name = "authorization", value = "用户授权token", paramType = "header", required = true, dataType = "String")
+    })
+    @GetMapping(value = "/user/{id:\\d+}")
+    public C_JSON_Result info(@PathVariable Long id) {
+
+        C_JSON_Result r = new C_JSON_Result();
+        r.data=id.toString();
+
+
+
+        return r;
     }
 
 }
