@@ -47,6 +47,7 @@ export default {
         var code = _this.util.chkRes(res)
         if (code === 0) {
           _this.util.LoginSuccess(res)
+          _this.$messagebox.alert('登录成功!', '提示')
           _this.$router.push('/')
         }
       }, function (res) {

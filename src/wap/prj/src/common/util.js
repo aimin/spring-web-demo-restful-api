@@ -26,7 +26,7 @@ export default {
   },
   // 登录
   LoginOut () {
-    localStorage.setItem('userinfo', undefined)
+    localStorage.removeItem('userinfo')
   },
   // 获取本地用户信息
   GetUserInfo () {
