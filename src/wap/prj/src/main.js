@@ -16,6 +16,7 @@ Vue.prototype.qs = QS
 
 Vue.prototype.$http.defaults.withCredentials = true
 Vue.use(Mint)
+Vue.use(Util)
 
 Vue.config.productionTip = false
 Vue.prototype.$baseUrl = process.env.baseUrl
@@ -27,7 +28,8 @@ new Vue({
   components: { App },
   template: '<App/>',
   mounted: function () {
+    this.util.setInstant(this)
     // 检查未登录
-    this.util.chkLogin(this)
+    this.util.chkLogin()
   }
 })

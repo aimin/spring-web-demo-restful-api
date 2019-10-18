@@ -1,10 +1,15 @@
 export default {
   name: 'util',
-  text () {
-    console.log('测试，测试！！！')
+  _vue: null,
+  _vueins: null,
+  install (vue) {
+    this._vue = vue
+  },
+  setInstant (vueIns) {
+    this._vueins = vueIns
   },
   showErr (msg) {
-    alert(msg)
+    this._vueins.$messagebox.alert(msg)
   },
   // 错误提示
   chkRes (res) {
@@ -14,16 +19,24 @@ export default {
     return res.data.code
   },
   // 登录成功，暂存token
-  loginSuccess (res) {
+  LoginSuccess (res) {
     console.log(res.data.data)
     localStorage.setItem('userinfo', JSON.stringify(res.data.data))
     console.log(JSON.parse(localStorage.getItem('userinfo')))
   },
+  // 登录
+  LoginOut () {
+    localStorage.setItem('userinfo', undefined)
+  },
+  // 获取本地用户信息
+  GetUserInfo () {
+    return JSON.parse(localStorage.getItem('userinfo'))
+  },
   // 检查未登录
-  chkLogin (_vue) {
+  chkLogin () {
     var userinfo = JSON.parse(localStorage.getItem('userinfo'))
-    if (userinfo === null) {
-      _vue.$router.push('/Login')
+    if (userinfo === null && location.href.search('/Login') < 1) {
+      this._vueins.$router.push('/Login')
     }
   }
 }

@@ -31,22 +31,23 @@ export default {
       var _this = this
       var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
       if (postData.uname === '') {
-        alert('用户名不可以空')
+        _this.util.showErr('用户名不可以空')
         return
       }
       if (postData.pwd === '') {
-        alert('密码不可以空')
+        _this.util.showErr('密码不可以空')
         return
       }
       if (postData.code === '') {
-        alert('请输入验证码')
+        _this.util.showErr('请输入验证码')
         return
       }
       postData = this.qs.stringify(postData)
       this.$http.post(this.$baseUrl + '/login', postData).then(function (res) {
         var code = _this.util.chkRes(res)
         if (code === 0) {
-          _this.util.loginSuccess(res)
+          _this.util.LoginSuccess(res)
+          _this.$router.push('/')
         }
       }, function (res) {
         console.log(res.status)
