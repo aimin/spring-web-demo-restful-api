@@ -124,9 +124,7 @@ public class C_Tool {
             return new C_Result<>();
         }
 
-        page = (page<2?0:page);
-
-        example.setOffset((long)(page*number));
+        example.setOffset((long)((page<2?0:page-1)*number));
         example.setLimit(number);
 
         List<O> list= dao.selectByExample(example);
@@ -135,6 +133,8 @@ public class C_Tool {
         result.list = list;
         result.count = dao.countByExample(example);
         result.pageCount = (long)Math.ceil((double)result.count/number);
+        page = (page<2?1:page);
+        result.nextpage = (page<result.pageCount?page+1:page);
 
         return result;
 

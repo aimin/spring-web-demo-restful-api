@@ -8,19 +8,15 @@
       <mt-button slot="right" icon="more"></mt-button>
     </mt-header>
 
-
-
     <router-view/>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App'
 }
 </script>
-
 
 <style>
   body{
