@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     submit (e) {
+      this.$indicator.open()
       var _this = this
       var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
       if (postData.uname === '') {
@@ -49,6 +50,7 @@ export default {
           _this.util.LoginSuccess(res)
           _this.$messagebox.alert('登录成功!', '提示')
           _this.$router.push('/')
+          _this.$indicator.close()
         }
       }, function (res) {
         console.log(res.status)
