@@ -38,6 +38,9 @@ public class C_JSON_Result {
         map.put(10003,"token无效");
 
 
+        map.put(20001,"线索联系人电话不能为空");
+        map.put(20002,"线索类型不能为空");
+
         return map;
     }
 

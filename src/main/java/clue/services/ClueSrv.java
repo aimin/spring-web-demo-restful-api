@@ -48,8 +48,6 @@ public class ClueSrv {
     public ClClue Add(ClClue clClue){
         clClue.setCreatetime(DateTime.now().getMillis());
         clClue.setLasttime(DateTime.now().getMillis());
-        int id = clue_dao.insert(clClue);
-        clClue.setClId((long)id);
         int n = clue_dao.insert(clClue);
         if(n>0){
             return clClue;
