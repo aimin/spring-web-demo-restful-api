@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Login from '@/views/Login'
 import Home from '@/views/Home'
 import Cluemg from '@/views/Cluemg'
+import CluePost from '@/views/CluePost'
 
 Vue.use(Router)
 export default new Router({routes: [{
@@ -25,6 +26,11 @@ export default new Router({routes: [{
   path: '/Cluemg',
   name: 'Cluemg',
   component: Cluemg
+},
+{
+  path: '/CluePost',
+  name: 'CluePost',
+  component: CluePost
 }
 ]
 })

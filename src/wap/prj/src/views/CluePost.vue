@@ -1,60 +1,84 @@
 <template>
-  <div class="Login" >
+  <div class="CluePost" >
     <form>
-    <div class="page-part">
-      <com-user-name ref="comUserName"></com-user-name>
-      <com-password ref="comPassword"></com-password>
-    </div>
-    <com-VerifyCode ref="comVerifyCode"></com-VerifyCode>
+      <mt-field label="联系人" placeholder="请输入联系人" type="text" name="clLinkMan" v-model="clLinkMan"></mt-field>
+      <mt-field label="手机号" placeholder="请输入手机号" type="text" name="clLinkMob" v-model="clLinkMob"></mt-field>
+      <mt-field label="类型" placeholder="请选择服务类型" @click.native="sheetVisible = true" type="text" disabled name="clType" v-model="clTypeV" ></mt-field>
 
-    <div class="page-button-group">
-      <mt-button size="large" type="primary" @click="submit">登录</mt-button>
-    </div>
+      <mt-field label="说明" placeholder="请输入说明" type="textarea" rows="4" v-model="clDesc"></mt-field>
+      <div class="page-button-group">
+        <mt-button size="large" type="primary" @click="submit">提交</mt-button>
+      </div>
     </form>
+    <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
   </div>
 </template>
 
 <script>
-import VerifyCode from '@/components/VerifyCode'
-import Password from '@/components/Password'
-import UserName from '@/components/UserName'
+var locationLa = 0
+var locationLo = 0
+// 初始化函数
+function init () {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  }
+  // 判断浏览器是否支持地理共享
+  if (navigator.geolocation) {
+    // 获取地理信息，并指定成功的回调函数
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      locationLo = pos.coords.longitude // 得到经度
+      locationLa = pos.coords.latitude // 得到纬度
+    }, function (e) {
+      console.log(e)
+    }, options)
+  }
+}init()
+
+var types = ['出售二手车', '求购二手车', '家庭保洁', '空调维修', '空调加氟', '电脑维修', '疏通下水道', '清洗油烟机', '小时工', '家政服务及维修']
 
 export default {
-  name: 'Login',
-  components: {
-    comVerifyCode: VerifyCode,
-    comPassword: Password,
-    comUserName: UserName
+  name: 'CluePost',
+  data () {
+    return {
+      sheetVisible: false,
+      actions: [],
+      clTypeV: '',
+      clType: 0,
+      clDesc: '',
+      clLinkMan: '',
+      clLinkMob: ''
+    }
   },
   methods: {
-    submit (e) {
-      this.$indicator.open()
-      var _this = this
-      var postData = {uname: this.$refs.comUserName.username, pwd: this.$refs.comPassword.passwd, verifyCode: this.$refs.comVerifyCode.code}
-      if (postData.uname === '') {
-        _this.util.showErr('用户名不可以空')
-        return
-      }
-      if (postData.pwd === '') {
-        _this.util.showErr('密码不可以空')
-        return
-      }
-      if (postData.code === '') {
-        _this.util.showErr('请输入验证码')
-        return
-      }
-      postData = this.qs.stringify(postData)
-      this.$http.post(this.$baseUrl + '/login', postData).then(function (res) {
-        var code = _this.util.chkRes(res)
+    submit () {
+      var com = this
+      let postData = {clDesc: this.clDesc, clLinkMan: this.clLinkMan, clLinkMob: this.clLinkMob, clType: this.clType, clLa: locationLa, clLo: locationLo}
+      this.$http.post(this.$baseUrl + '/clue', postData).then(function (res) {
+        var code = com.util.chkRes(res)
         if (code === 0) {
-          _this.util.LoginSuccess(res)
-          _this.$messagebox.alert('登录成功!', '提示')
-          _this.$router.push('/')
-          _this.$indicator.close()
+          com.$messagebox.alert('提交成功!', '提示')
+          // _this.$router.push('/')
+          com.$indicator.close()
         }
       }, function (res) {
         console.log(res.status)
       })
+    }
+  },
+  mounted () {
+    let com = this
+    for (let n in types) {
+      let name = types[n]
+      let index = parseInt(n) + 1
+      this.actions.push({name: name,
+        index: index,
+        method: function () {
+          com.clTypeV = this.name
+          com.clType = this.index
+          console.log(com.clType)
+        }})
     }
   }
 
