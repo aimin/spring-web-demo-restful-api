@@ -21,6 +21,15 @@ Vue.use(Util)
 Vue.config.productionTip = false
 Vue.prototype.$baseUrl = process.env.baseUrl
 
+// 总线使用
+// document.bus = new Vue()
+// document.bus.$on('cltypeEvent', (val) => {
+//   this.clType = val
+//   console.log(val)
+//   console.log('----')
+// })
+// document.bus.$emit('cltypeEvent', 2)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

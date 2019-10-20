@@ -1,7 +1,7 @@
 <template>
   <div class="page-button">
     <div class="page-button-group">
-      <mt-button size="large" type="primary">前台</mt-button>
+      <router-link to="/CluePost"><mt-button size="large" type="primary">前台</mt-button></router-link>
       <router-link to="/Cluemg"><mt-button size="large" type="danger" >管理后台</mt-button></router-link>
     </div>
 

@@ -15,6 +15,7 @@
 </template>
 
 <script>
+// /CluePost?cltype=5 设置进入自动类型
 var locationLa = 0
 var locationLo = 0
 // 初始化函数
@@ -68,6 +69,13 @@ export default {
     }
   },
   mounted () {
+    // 初始化类型
+    let cltype = this.$route.query['cltype']
+    if (cltype) {
+      this.clTypeV = types[cltype]
+      this.clType = cltype
+    }
+
     let com = this
     for (let n in types) {
       let name = types[n]
